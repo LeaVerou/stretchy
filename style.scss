@@ -6,13 +6,28 @@ $base: hsl(40, 60%, 90%); // beige
 
 @import "_svg";
 
+/* latin */
+@font-face {
+	font-family: 'Arvo';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Arvo'), url(http://fonts.gstatic.com/s/arvo/v8/rC7kKhY-eUDY-ucISTIf5PesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+}
+/* latin */
+@font-face {
+	font-family: 'Arvo';
+	font-style: normal;
+	font-weight: 700;
+	src: local('Arvo Bold'), local('Arvo-Bold'), url(http://fonts.gstatic.com/s/arvo/v8/uO-jO7kF010hXOpU_-jk8QLUuEpTyoUstqEm5AMlJo4.woff2) format('woff2');
+}
+
 @font-face {
 	src: local(Damion), url(Damion-Regular.ttf);
 	font-family: Damion;
 }
 
 body {
-	font: 100%/1.5 Rockwell, Helvetica Neue, sans-serif;
+	font: 100%/1.5 Rockwell, Arvo, Helvetica Neue, sans-serif;
 	margin: 0;
 }
 
@@ -46,6 +61,12 @@ header, section, footer {
 	padding: 1.5em calc(50% - 450px);
 	background: $accent1;
 	color: $base;
+}
+
+@media (max-width: 950px) {
+	header, section, footer {
+		padding: 1.5em 2em;
+	}
 }
 
 header {
@@ -146,10 +167,15 @@ section:nth-of-type(even) {
 #features {
 	ul {
 		padding: 0;
-		-webkit-columns: 2;
-		-moz-columns: 2;
-		columns: 2;
 		list-style: none;
+	}
+
+	@media (min-width: 600px) {
+		ul {
+			-webkit-columns: 2;
+			-moz-columns: 2;
+			columns: 2;
+		}
 	}
 
 		li {
