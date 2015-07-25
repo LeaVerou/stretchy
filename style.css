@@ -5,14 +5,12 @@
  * Do not use yet, API *will* change.
  */
 /* Helper functions */
-/* latin */
 @font-face {
   font-family: 'Arvo';
   font-style: normal;
   font-weight: 400;
   src: local("Arvo"), url(http://fonts.gstatic.com/s/arvo/v8/rC7kKhY-eUDY-ucISTIf5PesZW2xOQ-xsNqO47m55DA.woff2) format("woff2"); }
 
-/* latin */
 @font-face {
   font-family: 'Arvo';
   font-style: normal;
