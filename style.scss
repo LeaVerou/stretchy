@@ -10,18 +10,18 @@ $base: hsl(40, 60%, 90%); // beige
 	font-family: 'Arvo';
 	font-style: normal;
 	font-weight: 400;
-	src: local('Arvo'), url(http://fonts.gstatic.com/s/arvo/v8/rC7kKhY-eUDY-ucISTIf5PesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+	src: local('Arvo'), url(http://fonts.gstatic.com/s/arvo/v8/rC7kKhY-eUDY-ucISTIf5PesZW2xOQ-xsNqO47m55DA.woff2) format('woff2'), url(http://fonts.gstatic.com/s/arvo/v8/WJ6D195CfbTRlIs49IbkFw.woff) format('woff');
 }
 
 @font-face {
 	font-family: 'Arvo';
 	font-style: normal;
 	font-weight: 700;
-	src: local('Arvo Bold'), local('Arvo-Bold'), url(http://fonts.gstatic.com/s/arvo/v8/uO-jO7kF010hXOpU_-jk8QLUuEpTyoUstqEm5AMlJo4.woff2) format('woff2');
+	src: local('Arvo Bold'), local('Arvo-Bold'), url(http://fonts.gstatic.com/s/arvo/v8/uO-jO7kF010hXOpU_-jk8QLUuEpTyoUstqEm5AMlJo4.woff2) format('woff2'), url(http://fonts.gstatic.com/s/arvo/v8/0Aa8aBJcGN1n1zDNhqNrnQ.woff) format('woff');
 }
 
 @font-face {
-	src: local(Damion), url(Damion-Regular.ttf);
+	src: local(Damion), url(Damion-Regular.woff2) format('woff2'), url(Damion-Regular) format('woff'), url(Damion-Regular.ttf) format('truetype');
 	font-family: Damion;
 }
 

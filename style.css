@@ -16,7 +16,7 @@
   font-weight: 700;
   src: local("Arvo Bold"), local("Arvo-Bold"), url(http://fonts.gstatic.com/s/arvo/v8/uO-jO7kF010hXOpU_-jk8QLUuEpTyoUstqEm5AMlJo4.woff2) format("woff2"), url(http://fonts.gstatic.com/s/arvo/v8/0Aa8aBJcGN1n1zDNhqNrnQ.woff) format("woff"); }
 @font-face {
-  src: local(Damion), url(Damion-Regular.ttf);
+  src: local(Damion), url(Damion-Regular.woff2) format("woff2"), url(Damion-Regular) format("woff"), url(Damion-Regular.ttf) format("truetype");
   font-family: Damion; }
 body {
   font: 100%/1.5 Rockwell, Arvo, Helvetica Neue, sans-serif;
