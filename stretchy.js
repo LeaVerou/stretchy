@@ -1,5 +1,5 @@
 /*
- * Stretchy: Autosize an input, select, or textarea
+ * Stretchy: Form element autosizing, the way it should be.
  * by Lea Verou http://lea.verou.me 
  * MIT license
  */
@@ -72,7 +72,10 @@ var _ = self.Stretchy = {
 			// Safari misreports scrollWidth, so we will instead set scrollLeft to a
 			// huge number, and read that back to see what it was clipped to
 			element.scrollLeft = 1e+10;
-			element.style.width = (element.scrollLeft + offset) + "px";
+
+			var width = Math.max(element.scrollLeft + offset, element.scrollWidth - element.clientWidth);
+
+			element.style.width = width + "px";
 		}
 		else if(type == "select") {
 			// Need to use dummy element to measure :(
