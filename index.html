@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8" />
+<title>strechy.js</title>
+<link rel="stylesheet" href="style.css" />
+
+</head>
+<body>
+
+<header>
+	<h1><img src="logo.svg" alt="stretchy.js" /></h1>
+	
+	<div>
+		<p>Form element autosizing,<br /> the way it should be.</p>
+		<nav>
+			<ul>
+				<li><a href="#features">Features</a></li>
+				<li><a href="#examples">Examples</a></li>
+				<li><a href="#usage">Usage</a></li>
+				<li><a href="stretchy.js" download>Download</a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<section id="features">
+	<h1>Features</h1>
+
+	<ul>
+		<li><strong>Handles multiple types of form controls</strong> Textareas? Inputs? Select menus? You name it!</li>
+		<li><strong>Tiny footprint</strong> only 2KB minified and gzipped!</li>
+		<li><strong>Automatically accounts for newly added controls</strong> via mutation observers, where supported</li>
+		<li><strong>Restrict form controls by a selector</strong> …or don’t and autosize all your form controls!</li>
+		<li><strong>Completely standalone</strong> no jQuery or other dependencies</li>
+		<li><strong>Plays well with existing HTML/CSS</strong> Follows placeholders, styling, <code>min/max-width/height</code> constraints, transitions</li>
+		<li><strong>No JS knowledge required</strong> Everything configurable via HTML!</li>
+		<li><strong>Works in all modern browsers</strong> Chrome, FF 3.6, IE9, Opera, Safari, Android &amp; more.</li>
+	</ul>
+</section>
+
+<section id="examples">
+	<h1>Examples</h1>
+
+	<label>Textarea:
+		<textarea placeholder="Type here too"></textarea>
+	</label>
+	
+	<label>Input with placeholder:
+		<input placeholder="Type some text" />
+	</label>
+
+	<label>Input with intial value:
+		<input value="Some text" />
+	</label>
+
+	<label>Select:
+		<select>
+			<option>CSS</option>
+			<option>JavaScript</option>
+			<option>HTML</option>
+			<option>SVG</option>
+			<option>WAI-ARIA</option>
+		</select>
+	</label>
+</section>
+
+<section id="usage">
+	<h1>Usage</h1>
+
+	<p>Just include the script anywhere in the page, ideally right before the closing <code>&lt;/body></code> tag:</p>
+	<pre><code class="language-markup">&lt;script src="<a href="stretchy.min.js" download>stretchy.min.js</a>" async>&lt;/script></code></pre>
+
+	<p>By default, it applies to all <code>&lt;textarea></code>s, <code>&lt;select></code> menus with no <code>size</code> attribute and <code>&lt;input></code> elements that are text fields (e.g. with no <code>type</code> attribute, or with one equal to <code>text</code>, <code>tel</code>, <code>email</code>, <code>url</code>).</p>
+
+	<p>To limit that set further you can use the <code>data-stretchy-filter</code> attribute, on any element. Note that this means you can use the attribute on the <code>&lt;script></code> element that calls Stretchy itself, in which case you can also shorten its name to <code>data-filter</code>.</p>
+
+	<p>For example, to restrict it to elements that either have the <code>foo</code> class or are inside another element that does, you could use <code>data-stretchy-filter=".foo, .foo *"</code> on an element or call Stretchy like this:</p>
+
+	<pre><code class="language-markup">&lt;script src="<a href="stretchy.min.js" download>stretchy.min.js</a>" data-filter=".foo, .foo *" async>&lt;/script></code></pre>
+
+	<p>If you specify the <code>data-stretchy-filter</code> attribute on multiple elements, the last value (in source order) wins. <code>data-filter</code> directly on Stretchy’s <code>&lt;script></code> element takes priority over any <code>data-stretchy-filter</code> declaration.</p>
+
+	<p>If you want to avoid modifying the markup, you can use JavaScript instead, as long as this is set before <code>DOMContentLoaded</code> fires:</p>
+
+	<pre><code class="language-javascript">Stretchy.selector.filter = ".foo, .foo *";</code></pre>
+</section>
+
+<section id="api">
+	<h1>JavaScript API</h1>
+
+	<p>Stretchy has a spartan API, since in most cases you don’t need to call it at all. Stretchy works via event delegation and detects new elements via mutation observers, so <strong>you do not need to call any API methods for adding new elements</strong> via scripting (e.g. AJAX).</p>
+
+	<p>If needed, these are Stretchy’s API methods:</p>
+
+	<dl>
+		<dt>Stretchy.apply(element)</dt>
+		<dd>Autosize one element based on its content. Note that this does not set up any event listeners, it just calculates and sets the right dimension (width or height, depending on the type of control) once.</dd>
+
+		<dt>Stretchy.applyAll(elements)</dt>
+		<dd>Apply <code>Stretchy.apply()</code> to a collection of elements, or all Stretchy is set to apply to, if no argument is provided.</dd>
+		
+		<dt>Stretchy.applies()</dt>
+		<dd>Can Stretchy be used on this particular element? (checks if element is in the DOM, if it's of the right type and if it matches the selector filter provided by <code>data-stretchy-selector</code>, if the attribute is set.</dd>
+
+		<dt>Stretchy.active</dt>
+		<dd>Boolean. Set to <code>false</code> to temporarily disable Stretchy.</dd>
+	</dl>
+</section>
+
+<footer>
+	Made with &hearts; by <a href="http://lea.verou.me">Lea Verou</a>.
+</footer>
+	
+<script src="stretchy.js"></script>
+</body>
+</html>

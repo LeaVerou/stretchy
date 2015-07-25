@@ -1,0 +1,58 @@
+/*
+ * Cascading Graphics Sheets: Generate SVG data URIs in SCSS!
+ * By Lea Verou — http://lea.verou.me
+ * Do not use yet, API *will* change.
+ */
+
+ /* Helper functions */
+
+ // Replace all instances of $search in $string with $replace
+ @function str-replace($string, $search, $replace) {
+ 	$length: str-length($search);
+ 	$index: str-index($string, $search);
+ 	$slice: $string;
+ 	
+ 	@while $index != null {
+ 	  $start: if($index > 1, str-slice($slice, 1, $index - 1), '');
+ 		$slice: $start + $replace + str-slice($slice, $index + $length);
+ 	
+ 		$index: str-index($slice, $search);
+ 	}
+ 	
+ 	@return $slice;
+ }
+
+// Create an inline SVG data URI
+@function svg($content, $viewBox: "0 0 100 100") {
+	$content: str-replace($content, '#', '%23'); // Firefox needs this
+	
+	@return url('data:image/svg+xml,<svg viewBox="#{$viewBox}" xmlns="http://www.w3.org/2000/svg">#{$content}</svg>');
+}
+
+@function svg-polygon($fill, $points) {
+	@return unquote('<polygon points="#{$points}" fill="#{$fill}" />');
+}
+
+@function svg-path($fill, $d) {
+	@return unquote('<path d="#{$d}" fill="#{$fill}" />');
+}
+
+@function svg-rect($fill, $width: '100%', $height: '100%', $x: '0', $y: '0', $attr:'') {
+	@return unquote('<rect x="#{$x}" y="#{$y}" width="#{$width}" height="#{$height}" fill="#{$fill}" #{$attr}/>');
+}
+
+@function svg-square($fill, $width: '100%', $x: '0', $y: '0') {
+	@return svg-rect($fill, $width, $width, $x, $y);
+}
+
+@function svg-circle($fill, $r: '50%', $cx: '50%', $cy: '50%') {
+	@return unquote('<circle cx="#{$cx}" cy="#{$cy}" r="#{$r}" fill="#{$fill}"/>');
+}
+
+@function svg-line($stroke, $x1: 0, $y1: 0, $x2: 100, $y2: 100, $width: '1pt') {
+	@return unquote('<line x1="#{$x1}" y1="#{$y1}" x2="#{$x2}" y2="#{$y2}" stroke="#{$stroke}" stroke-width="#{$width}"/>');
+}
+
+@function svg-text($text, $y: 1.2em, $style:'', $x:0) {
+	@return unquote('<text y="#{$y}" x="#{$x}" style="#{$style}">#{$text}</text>');
+}

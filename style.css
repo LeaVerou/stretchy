@@ -1,0 +1,157 @@
+@charset "UTF-8";
+/*
+ * Cascading Graphics Sheets: Generate SVG data URIs in SCSS!
+ * By Lea Verou — http://lea.verou.me
+ * Do not use yet, API *will* change.
+ */
+/* Helper functions */
+@font-face {
+  src: local(Damion), url(Damion-Regular.ttf);
+  font-family: Damion; }
+
+body {
+  font: 100%/1.5 Rockwell, Helvetica Neue, sans-serif;
+  margin: 0; }
+
+code, pre {
+  font-family: Consolas, Monaco, Ubuntu Mono, monospace; }
+
+input, textarea, select {
+  border: 2px solid;
+  padding: 0.1em 0.3em;
+  font: inherit;
+  background: transparent;
+  color: inherit;
+  box-sizing: border-box; }
+
+::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.5); }
+
+::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.5); }
+
+h1 {
+  margin: 0;
+  font: 300% Damion, cursive; }
+
+a {
+  color: inherit; }
+
+header, section, footer {
+  max-width: 900px;
+  padding: 1.5em calc(50% - 450px);
+  background: #4daab3;
+  color: #f5ebd6; }
+
+header {
+  display: -webkit-flex;
+  display: flex; }
+  header > h1 {
+    display: inline-block;
+    width: 350px;
+    margin-bottom: -.7em;
+    margin-left: -2em; }
+  header img {
+    display: block; }
+  header > div {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: column;
+    flex-flow: column;
+    -webkit-flex: 1;
+    flex: 1;
+    text-align: right;
+    margin: 0; }
+  header p {
+    -webkit-flex: 1;
+    flex: 1;
+    margin: 0;
+    font-size: 150%;
+    line-height: 1.2;
+    font-weight: bold;
+    letter-spacing: -.03em; }
+  header nav {
+    font: 160% Damion, cursive; }
+    header nav ul {
+      margin: 0; }
+    header nav li {
+      display: inline;
+      list-style: none; }
+    header nav a {
+      display: inline-block;
+      padding: 0.15em 0.4em 0.15em 0.3em;
+      border-radius: .3em;
+      text-decoration: none;
+      border: .12em solid transparent;
+      line-height: 1; }
+    header nav a[href="stretchy.js"],
+    header nav a:hover {
+      border-color: #f5ebd6; }
+    header nav a:hover {
+      background: #f5ebd6;
+      color: #4daab3; }
+
+section:nth-of-type(odd) {
+  background: #f5ebd6;
+  color: black; }
+  section:nth-of-type(odd) h1 {
+    color: #994433; }
+
+section:nth-of-type(even) {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  background: url('data:image/svg+xml,<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 100,100 200,0" fill="%23f5ebd6" /></svg>') top/1em auto repeat-x, url('data:image/svg+xml,<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg"><polygon points="0,100 100,0 200,100" fill="%23f5ebd6" /></svg>') bottom/1em auto repeat-x;
+  background-color: #994433; }
+  section:nth-of-type(even) h1 {
+    color: #f5ebd6; }
+  section:nth-of-type(even):last-of-type {
+    background-image: url('data:image/svg+xml,<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 100,100 200,0" fill="%23f5ebd6" /></svg>'), url('data:image/svg+xml,<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg"><polygon points="0,100 100,0 200,100" fill="%234daab3" /></svg>'); }
+
+#features ul {
+  padding: 0;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  columns: 2;
+  list-style: none; }
+
+#features li {
+  position: relative;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  font-size: 70%;
+  margin: 0 0 1em 2.5em; }
+
+#features li::before {
+  content: "✓";
+  position: absolute;
+  top: .05em;
+  right: 100%;
+  margin-right: .1em;
+  font-size: 320%;
+  line-height: 1;
+  color: #4daab3; }
+
+#features li strong {
+  display: block;
+  font-size: 150%; }
+
+#examples {
+  overflow: hidden; }
+  #examples label,
+  #examples textarea {
+    display: block; }
+  #examples label:first-of-type {
+    float: right;
+    margin-top: -.6em; }
+  #examples label {
+    margin: 1em 0; }
+
+#api dt {
+  font-weight: bold; }
+
+#api dd + dt {
+  margin-top: 1em; }
+
+footer {
+  background: #4daab3 url(logo.svg) right/auto 100% no-repeat;
+  background-origin: content-box; }
