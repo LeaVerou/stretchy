@@ -212,3 +212,49 @@ footer {
 	background: $accent1 url(logo.svg) right / auto 100% no-repeat;
 	background-origin: content-box;
 }
+
+.github-ribbon {
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: rotate(90deg) translateX(70.71067814%) rotate(-90deg) rotate(-45deg) translateY(-100%);
+	transform-origin: 0 0;
+	padding: .4em 3em;
+	background: $accent2;
+	text-decoration: none;
+	color: $base;
+	box-shadow: 0 .1em 0 .1em rgba(0,0,0,.15);
+
+	&:hover {
+		background: black;
+		color: white;
+	}
+}
+
+.twitter {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+}
+
+#carbonads {
+    position: absolute;
+    top: 75vh;
+    right: 1em;
+    max-width: 130px;
+    padding: 1em;
+    border: 1px solid silver;
+    font-size: 50%;
+    line-height: 1.5;
+}
+
+@media (max-width: 950px) {
+    #carbonads {
+        display: none;
+    }
+}
+
+.carbon-text {
+    display: block;
+    text-decoration: none;
+}
