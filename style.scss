@@ -231,10 +231,13 @@ footer {
 	}
 }
 
-.twitter {
+.social-media {
 	position: absolute;
 	top: 1em;
 	right: 1em;
+	width: -webkit-min-content;
+	width: -moz-min-content;
+	width: min-content;
 }
 
 #carbonads {
