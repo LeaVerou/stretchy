@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /*
  * Cascading Graphics Sheets: Generate SVG data URIs in SCSS!
- * By Lea Verou — http://lea.verou.me
+ * By Lea Verou ÔÇö http://lea.verou.me
  * Do not use yet, API *will* change.
  */
 /* Helper functions */
@@ -9,18 +9,15 @@
   font-family: 'Arvo';
   font-style: normal;
   font-weight: 400;
-  src: local("Arvo"), url(http://fonts.gstatic.com/s/arvo/v8/rC7kKhY-eUDY-ucISTIf5PesZW2xOQ-xsNqO47m55DA.woff2) format("woff2"); }
-
+  src: local("Arvo"), url(http://fonts.gstatic.com/s/arvo/v8/rC7kKhY-eUDY-ucISTIf5PesZW2xOQ-xsNqO47m55DA.woff2) format("woff2"), url(http://fonts.gstatic.com/s/arvo/v8/WJ6D195CfbTRlIs49IbkFw.woff) format("woff"); }
 @font-face {
   font-family: 'Arvo';
   font-style: normal;
   font-weight: 700;
-  src: local("Arvo Bold"), local("Arvo-Bold"), url(http://fonts.gstatic.com/s/arvo/v8/uO-jO7kF010hXOpU_-jk8QLUuEpTyoUstqEm5AMlJo4.woff2) format("woff2"); }
-
+  src: local("Arvo Bold"), local("Arvo-Bold"), url(http://fonts.gstatic.com/s/arvo/v8/uO-jO7kF010hXOpU_-jk8QLUuEpTyoUstqEm5AMlJo4.woff2) format("woff2"), url(http://fonts.gstatic.com/s/arvo/v8/0Aa8aBJcGN1n1zDNhqNrnQ.woff) format("woff"); }
 @font-face {
   src: local(Damion), url(Damion-Regular.ttf);
   font-family: Damion; }
-
 body {
   font: 100%/1.5 Rockwell, Arvo, Helvetica Neue, sans-serif;
   margin: 0; }
@@ -30,7 +27,7 @@ code, pre {
 
 input, textarea, select {
   border: 2px solid;
-  padding: 0.1em 0.3em;
+  padding: .1em .3em;
   font: inherit;
   background: transparent;
   color: inherit;
@@ -58,7 +55,6 @@ header, section, footer {
 @media (max-width: 950px) {
   header, section, footer {
     padding: 1.5em 2em; } }
-
 header {
   display: -webkit-flex;
   display: flex; }
@@ -95,7 +91,7 @@ header {
       list-style: none; }
     header nav a {
       display: inline-block;
-      padding: 0.15em 0.4em 0.15em 0.3em;
+      padding: .15em .4em .15em .3em;
       border-radius: .3em;
       text-decoration: none;
       border: .12em solid transparent;
@@ -126,22 +122,19 @@ section:nth-of-type(even) {
 #features ul {
   padding: 0;
   list-style: none; }
-
 @media (min-width: 600px) {
   #features ul {
     -webkit-columns: 2;
     -moz-columns: 2;
     columns: 2; } }
-
 #features li {
   position: relative;
   break-inside: avoid;
   -webkit-column-break-inside: avoid;
   font-size: 70%;
   margin: 0 0 1em 2.5em; }
-
 #features li::before {
-  content: "✓";
+  content: "Ô£ô";
   position: absolute;
   top: .05em;
   right: 100%;
@@ -149,7 +142,6 @@ section:nth-of-type(even) {
   font-size: 320%;
   line-height: 1;
   color: #4daab3; }
-
 #features li strong {
   display: block;
   font-size: 150%; }
@@ -167,7 +159,6 @@ section:nth-of-type(even) {
 
 #api dt {
   font-weight: bold; }
-
 #api dd + dt {
   margin-top: 1em; }
 
@@ -179,9 +170,9 @@ footer {
   position: absolute;
   top: 0;
   left: 0;
-  transform: rotate(90deg) translateX(70.71067814%) rotate(-90deg) rotate(-45deg) translateY(-100%);
+  transform: rotate(90deg) translateX(70.71068%) rotate(-90deg) rotate(-45deg) translateY(-100%);
   transform-origin: 0 0;
-  padding: 0.4em 3em;
+  padding: .4em 3em;
   background: #994433;
   text-decoration: none;
   color: #f5ebd6;
@@ -211,7 +202,8 @@ footer {
 @media (max-width: 950px) {
   #carbonads {
     display: none; } }
-
 .carbon-text {
   display: block;
   text-decoration: none; }
+
+/*# sourceMappingURL=style.css.map */
