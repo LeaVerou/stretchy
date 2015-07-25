@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /*
  * Cascading Graphics Sheets: Generate SVG data URIs in SCSS!
- * By Lea Verou ÔÇö http://lea.verou.me
+ * By Lea Verou  —  http://lea.verou.me
  * Do not use yet, API *will* change.
  */
 /* Helper functions */
@@ -134,7 +134,7 @@ section:nth-of-type(even) {
   font-size: 70%;
   margin: 0 0 1em 2.5em; }
 #features li::before {
-  content: "Ô£ô";
+  content: "✓";
   position: absolute;
   top: .05em;
   right: 100%;
