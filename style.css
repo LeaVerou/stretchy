@@ -190,7 +190,8 @@ footer {
   padding: 1em;
   border: 1px solid silver;
   font-size: 50%;
-  line-height: 1.5; }
+  line-height: 1.5;
+  background: rgba(255, 255, 255, 0.9); }
 
 @media (max-width: 950px) {
   #carbonads {
