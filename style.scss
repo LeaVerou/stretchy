@@ -1,9 +1,9 @@
 // Colors
-$accent1: hsl(185, 40%, 50%); // turquoise 
+$accent1: hsl(185, 40%, 50%); // turquoise
 $accent2: hsl(10, 50%, 40%); // dark red
 $base: hsl(40, 60%, 90%); // beige
 
-@import url(http://fonts.googleapis.com/css?family=Arvo:400,700|Damion);
+@import url(https://fonts.googleapis.com/css?family=Arvo:400,700|Damion);
 @import "_svg";
 
 body {
@@ -244,7 +244,7 @@ footer {
 }
 
 .social-media {
-	
+
 
 	@media (min-width: 1150px) {
 		& {
