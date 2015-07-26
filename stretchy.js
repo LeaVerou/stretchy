@@ -32,8 +32,8 @@ var _ = self.Stretchy = {
 	script: $$("script").pop(),
 
 	// Autosize one element. The core of Stretchy.
-	apply: function(element) {
-		if (!_.applies(element)) {
+	resize: function(element) {
+		if (!_.resizes(element)) {
 			return;
 		}
 		
@@ -118,16 +118,16 @@ var _ = self.Stretchy = {
 	},
 
 	// Autosize multiple elements
-	applyAll: function(elements) {
+	resizeAll: function(elements) {
 		$$(elements || _.selectors.base).forEach(function (element) {
-			_.apply(element);
+			_.resize(element);
 		});	
 	},
 
 	active: true,
 
 	// Will stretchy do anything for this element?
-	applies: function(element) {
+	resizes: function(element) {
 		return element &&
 		       element.parentNode &&
 		       element.matches &&
@@ -139,7 +139,7 @@ var _ = self.Stretchy = {
 		_.selectors.filter = _.script.getAttribute("data-filter") ||
 		                     ($$("[data-stretchy-filter]").pop() || document.body).getAttribute("data-stretchy-filter") || "*";
 
-		_.applyAll();
+		_.resizeAll();
 	},
 
 	$$: $$
@@ -159,7 +159,7 @@ else {
 // Listen for changes
 var listener = function(evt) {
 	if (_.active) {
-		_.apply(evt.target);
+		_.resize(evt.target);
 	}
 };
 
@@ -174,7 +174,7 @@ if (self.MutationObserver) {
 		if (_.active) {
 			mutations.forEach(function(mutation) {
 				if (mutation.type == "childList") {
-					Stretchy.applyAll(mutation.addedNodes);
+					Stretchy.resizeAll(mutation.addedNodes);
 				}
 			});
 		}

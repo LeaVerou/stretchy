@@ -95,13 +95,13 @@
 	<p>If needed, these are Stretchy’s API methods:</p>
 
 	<dl>
-		<dt>Stretchy.apply(element)</dt>
+		<dt>Stretchy.resize(element)</dt>
 		<dd>Autosize one element based on its content. Note that this does not set up any event listeners, it just calculates and sets the right dimension (width or height, depending on the type of control) once.</dd>
 
-		<dt>Stretchy.applyAll(elements)</dt>
-		<dd>Apply <code>Stretchy.apply()</code> to a collection of elements, or all Stretchy is set to apply to, if no argument is provided.</dd>
+		<dt>Stretchy.resizeAll(elements)</dt>
+		<dd>Apply <code>Stretchy.resize()</code> to a collection of elements, or all Stretchy is set to apply to, if no argument is provided.</dd>
 
-		<dt>Stretchy.applies()</dt>
+		<dt>Stretchy.resizes()</dt>
 		<dd>Can Stretchy be used on this particular element? (checks if element is in the DOM, if it's of the right type and if it matches the selector filter provided by <code>data-stretchy-selector</code>, if the attribute is set.</dd>
 
 		<dt>Stretchy.active</dt>
@@ -113,7 +113,7 @@
 	<h1>Browser Support Notes</h1>
 
 	<ul>
-		<li>On <a href="http://caniuse.com/#feat=mutationobserver">browsers that do not support mutation observers</a>, you have to manually call <code>Stretchy.apply()</code> on new elements. </li>
+		<li>On <a href="http://caniuse.com/#feat=mutationobserver">browsers that do not support mutation observers</a>, you have to manually call <code>Stretchy.resize()</code> on new elements. </li>
 		<li>IE has an issue with <code>&lt;input></code> elements, due to it misreporting <code>scrollWidth</code>. If this matters to you, you can use <a href="https://github.com/gregwhitworth/scrollWidthPolyfill">this polyfill</a> by Greg Whitworth (under development).</li>
 	</ul>
 </section>
