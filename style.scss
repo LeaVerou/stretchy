@@ -244,12 +244,18 @@ footer {
 }
 
 .social-media {
-	position: absolute;
-	top: 1em;
-	right: 1em;
-	width: -webkit-min-content;
-	width: -moz-min-content;
-	width: min-content;
+	
+
+	@media (min-width: 1150px) {
+		& {
+			position: absolute;
+			top: 1em;
+			right: 1em;
+			width: -webkit-min-content;
+			width: -moz-min-content;
+			width: min-content;
+		}
+	}
 }
 
 #carbonads {
