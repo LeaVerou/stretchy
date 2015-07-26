@@ -11,21 +11,21 @@
  	$length: str-length($search);
  	$index: str-index($string, $search);
  	$slice: $string;
- 	
+
  	@while $index != null {
  	  $start: if($index > 1, str-slice($slice, 1, $index - 1), '');
  		$slice: $start + $replace + str-slice($slice, $index + $length);
- 	
+
  		$index: str-index($slice, $search);
  	}
- 	
+
  	@return $slice;
  }
 
 // Create an inline SVG data URI
 @function svg($content, $viewBox: "0 0 100 100") {
 	$content: str-replace($content, '#', '%23'); // Firefox needs this
-	
+
 	@return url('data:image/svg+xml,<svg viewBox="#{$viewBox}" xmlns="http://www.w3.org/2000/svg">#{$content}</svg>');
 }
 
