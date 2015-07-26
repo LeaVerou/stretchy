@@ -49,10 +49,12 @@ header {
   header > h1 {
     display: inline-block;
     width: 350px;
-    margin-bottom: -.7em;
+    margin-bottom: -.66em;
     margin-left: -2em; }
-  header img {
-    display: block; }
+  header iframe {
+    display: block;
+    width: 100%;
+    border: 0; }
   header > div {
     display: -webkit-flex;
     display: flex;
@@ -133,6 +135,8 @@ section:nth-of-type(even) {
 #features li strong {
   display: block;
   font-size: 150%; }
+  #features li strong a:not(:hover) {
+    text-decoration: none; }
 
 #examples {
   overflow: hidden; }

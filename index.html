@@ -10,7 +10,7 @@
 <body>
 
 <header>
-	<h1><img src="logo.svg" alt="stretchy.js" /></h1>
+	<h1><iframe src="logo.svg"></iframe></h1>
 	
 	<div>
 		<p>Form element autosizing,<br /> the way it should be.</p>
@@ -36,7 +36,7 @@
 		<li><strong>Completely standalone</strong> no jQuery or other dependencies</li>
 		<li><strong>Plays well with existing HTML/CSS</strong> Follows placeholders, styling, <code>min/max-width/height</code> constraints, transitions</li>
 		<li><strong>No JS knowledge required</strong> Everything configurable via HTML!</li>
-		<li><strong>Works in all modern browsers</strong> Chrome, FF 3.6, IE9, Opera, Safari, Android &amp; more.</li>
+		<li><strong><a href="#browser-support">Works in all modern browsers</a></strong> Chrome, FF 3.6, IE9, Opera, Safari, Android &amp; more.</li>
 	</ul>
 </section>
 
@@ -107,6 +107,15 @@
 		<dt>Stretchy.active</dt>
 		<dd>Boolean. Set to <code>false</code> to temporarily disable Stretchy.</dd>
 	</dl>
+</section>
+
+<section id="browser-support">
+	<h1>Browser Support Notes</h1>
+
+	<ul>
+		<li>On <a href="http://caniuse.com/#feat=mutationobserver">browsers that do not support mutation observers</a>, you have to manually call <code>Stretchy.apply()</code> on new elements. </li>
+		<li>IE has an issue with <code>&lt;input></code> elements, due to it misreporting <code>scrollWidth</code>. If this matters to you, you can use <a href="https://github.com/gregwhitworth/scrollWidthPolyfill">this polyfill</a> by Greg Whitworth (under development).</li>
+	</ul>
 </section>
 
 <footer>
