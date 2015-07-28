@@ -80,7 +80,7 @@ var _ = self.Stretchy = {
 		else if(type == "select") {
 			// Need to use dummy element to measure :(
 			var option = document.createElement("_");
-			option.textContent = element.selectedOptions[0].textContent;
+			option.textContent = element.options[element.selectedIndex].textContent;
 			element.parentNode.insertBefore(option, element.nextSibling);
 
 			// The name of the appearance property, as it might be prefixed
