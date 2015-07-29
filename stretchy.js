@@ -77,7 +77,7 @@ var _ = self.Stretchy = {
 
 			element.style.width = width + "px";
 		}
-		else if(type == "select") {
+		else if (type == "select") {
 			// Need to use dummy element to measure :(
 			var option = document.createElement("_");
 			option.textContent = element.options[element.selectedIndex].textContent;
@@ -102,7 +102,7 @@ var _ = self.Stretchy = {
 			if (option.offsetWidth > 0) {
 				element.style.width = option.offsetWidth + "px";
 
-				if (cs[appearance] && cs[appearance] !== "none") {
+				if (!cs[appearance] || cs[appearance] !== "none") {
 					// Account for arrow
 					element.style.width = "calc(" + element.style.width + " + 2em)";
 				}
