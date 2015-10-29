@@ -149,6 +149,27 @@ var _ = self.Stretchy = {
 
 // DOM already loaded?
 if (document.readyState !== "loading") {
+	document.body.addEventListener("input", listener);
+
+	// Firefox fires a change event instead of an input event
+	document.body.addEventListener("change", listener);
+
+	// Listen for new elements
+	if (self.MutationObserver) {
+		(new MutationObserver(function(mutations) {
+			if (_.active) {
+				mutations.forEach(function(mutation) {
+					if (mutation.type == "childList") {
+						Stretchy.resizeAll(mutation.addedNodes);
+					}
+				});
+			}
+		})).observe(document.body, {
+					childList: true,
+					subtree: true
+				});
+	}
+
 	_.init();
 }
 else {
@@ -162,26 +183,5 @@ var listener = function(evt) {
 		_.resize(evt.target);
 	}
 };
-
-document.body.addEventListener("input", listener);
-
-// Firefox fires a change event instead of an input event
-document.body.addEventListener("change", listener);
-
-// Listen for new elements
-if (self.MutationObserver) {
-	(new MutationObserver(function(mutations) {
-		if (_.active) {
-			mutations.forEach(function(mutation) {
-				if (mutation.type == "childList") {
-					Stretchy.resizeAll(mutation.addedNodes);
-				}
-			});
-		}
-	})).observe(document.body, {
-		childList: true,
-		subtree: true
-	});
-}
 
 })();
