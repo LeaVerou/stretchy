@@ -1,18 +1,13 @@
-
 // Colors
-$accent1: hsl(185, 40%, 50%); // turquoise 
+$accent1: hsl(185, 40%, 50%); // turquoise
 $accent2: hsl(10, 50%, 40%); // dark red
 $base: hsl(40, 60%, 90%); // beige
 
+@import url(https://fonts.googleapis.com/css?family=Arvo:400,700|Damion);
 @import "_svg";
 
-@font-face {
-	src: local(Damion), url(Damion-Regular.ttf);
-	font-family: Damion;
-}
-
 body {
-	font: 100%/1.5 Rockwell, Helvetica Neue, sans-serif;
+	font: 100%/1.5 Rockwell, Arvo, Helvetica Neue, sans-serif;
 	margin: 0;
 }
 
@@ -48,6 +43,12 @@ header, section, footer {
 	color: $base;
 }
 
+@media (max-width: 950px) {
+	header, section, footer {
+		padding: 1.5em 2em;
+	}
+}
+
 header {
 	display: -webkit-flex;
 	display: flex;
@@ -55,12 +56,14 @@ header {
 	& > h1 {
 		display: inline-block;
 		width: 350px;
-		margin-bottom: -.7em;
+		margin-bottom: -.66em;
 		margin-left: -2em;
 	}
 
-	img {
+	iframe {
 		display: block;
+		width: 100%;
+		border: 0;
 	}
 
 	& > div {
@@ -146,10 +149,15 @@ section:nth-of-type(even) {
 #features {
 	ul {
 		padding: 0;
-		-webkit-columns: 2;
-		-moz-columns: 2;
-		columns: 2;
 		list-style: none;
+	}
+
+	@media (min-width: 600px) {
+		ul {
+			-webkit-columns: 2;
+			-moz-columns: 2;
+			columns: 2;
+		}
 	}
 
 		li {
@@ -173,6 +181,10 @@ section:nth-of-type(even) {
 			li strong {
 				display: block;
 				font-size: 150%;
+
+				a:not(:hover) {
+					text-decoration: none;
+				}
 			}
 }
 
@@ -231,10 +243,19 @@ footer {
 	}
 }
 
-.twitter {
-	position: absolute;
-	top: 1em;
-	right: 1em;
+.social-media {
+
+
+	@media (min-width: 1150px) {
+		& {
+			position: absolute;
+			top: 1em;
+			right: 1em;
+			width: -webkit-min-content;
+			width: -moz-min-content;
+			width: min-content;
+		}
+	}
 }
 
 #carbonads {
@@ -246,6 +267,7 @@ footer {
     border: 1px solid silver;
     font-size: 50%;
     line-height: 1.5;
+    background: hsla(0,0%,100%,.9);
 }
 
 @media (max-width: 950px) {

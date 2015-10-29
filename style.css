@@ -1,16 +1,13 @@
 @charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Arvo:400,700|Damion);
 /*
  * Cascading Graphics Sheets: Generate SVG data URIs in SCSS!
  * By Lea Verou — http://lea.verou.me
  * Do not use yet, API *will* change.
  */
 /* Helper functions */
-@font-face {
-  src: local(Damion), url(Damion-Regular.ttf);
-  font-family: Damion; }
-
 body {
-  font: 100%/1.5 Rockwell, Helvetica Neue, sans-serif;
+  font: 100%/1.5 Rockwell, Arvo, Helvetica Neue, sans-serif;
   margin: 0; }
 
 code, pre {
@@ -18,7 +15,7 @@ code, pre {
 
 input, textarea, select {
   border: 2px solid;
-  padding: 0.1em 0.3em;
+  padding: .1em .3em;
   font: inherit;
   background: transparent;
   color: inherit;
@@ -43,16 +40,21 @@ header, section, footer {
   background: #4daab3;
   color: #f5ebd6; }
 
+@media (max-width: 950px) {
+  header, section, footer {
+    padding: 1.5em 2em; } }
 header {
   display: -webkit-flex;
   display: flex; }
   header > h1 {
     display: inline-block;
     width: 350px;
-    margin-bottom: -.7em;
+    margin-bottom: -.66em;
     margin-left: -2em; }
-  header img {
-    display: block; }
+  header iframe {
+    display: block;
+    width: 100%;
+    border: 0; }
   header > div {
     display: -webkit-flex;
     display: flex;
@@ -79,7 +81,7 @@ header {
       list-style: none; }
     header nav a {
       display: inline-block;
-      padding: 0.15em 0.4em 0.15em 0.3em;
+      padding: .15em .4em .15em .3em;
       border-radius: .3em;
       text-decoration: none;
       border: .12em solid transparent;
@@ -109,18 +111,18 @@ section:nth-of-type(even) {
 
 #features ul {
   padding: 0;
-  -webkit-columns: 2;
-  -moz-columns: 2;
-  columns: 2;
   list-style: none; }
-
+@media (min-width: 600px) {
+  #features ul {
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    columns: 2; } }
 #features li {
   position: relative;
   break-inside: avoid;
   -webkit-column-break-inside: avoid;
   font-size: 70%;
   margin: 0 0 1em 2.5em; }
-
 #features li::before {
   content: "✓";
   position: absolute;
@@ -130,10 +132,11 @@ section:nth-of-type(even) {
   font-size: 320%;
   line-height: 1;
   color: #4daab3; }
-
 #features li strong {
   display: block;
   font-size: 150%; }
+  #features li strong a:not(:hover) {
+    text-decoration: none; }
 
 #examples {
   overflow: hidden; }
@@ -148,7 +151,6 @@ section:nth-of-type(even) {
 
 #api dt {
   font-weight: bold; }
-
 #api dd + dt {
   margin-top: 1em; }
 
@@ -162,7 +164,7 @@ footer {
   left: 0;
   transform: rotate(90deg) translateX(70.71067814%) rotate(-90deg) rotate(-45deg) translateY(-100%);
   transform-origin: 0 0;
-  padding: 0.4em 3em;
+  padding: .4em 3em;
   background: #994433;
   text-decoration: none;
   color: #f5ebd6;
@@ -171,10 +173,14 @@ footer {
     background: black;
     color: white; }
 
-.twitter {
-  position: absolute;
-  top: 1em;
-  right: 1em; }
+@media (min-width: 1150px) {
+  .social-media {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: -webkit-min-content;
+    width: -moz-min-content;
+    width: min-content; } }
 
 #carbonads {
   position: absolute;
@@ -184,12 +190,12 @@ footer {
   padding: 1em;
   border: 1px solid silver;
   font-size: 50%;
-  line-height: 1.5; }
+  line-height: 1.5;
+  background: rgba(255, 255, 255, 0.9); }
 
 @media (max-width: 950px) {
   #carbonads {
     display: none; } }
-
 .carbon-text {
   display: block;
   text-decoration: none; }

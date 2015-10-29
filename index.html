@@ -10,8 +10,8 @@
 <body>
 
 <header>
-	<h1><img src="logo.svg" alt="stretchy.js" /></h1>
-	
+	<h1><iframe src="logo.svg"></iframe></h1>
+
 	<div>
 		<p>Form element autosizing,<br /> the way it should be.</p>
 		<nav>
@@ -30,13 +30,13 @@
 
 	<ul>
 		<li><strong>Handles multiple types of form controls</strong> Textareas? Inputs? Select menus? You name it!</li>
-		<li><strong>Tiny footprint</strong> only 2KB minified and gzipped!</li>
+		<li><strong>Tiny footprint</strong> Less than 1.5KB minified and gzipped!</li>
 		<li><strong>Automatically accounts for newly added controls</strong> via mutation observers, where supported</li>
 		<li><strong>Restrict form controls by a selector</strong> …or don’t and autosize all your form controls!</li>
 		<li><strong>Completely standalone</strong> no jQuery or other dependencies</li>
 		<li><strong>Plays well with existing HTML/CSS</strong> Follows placeholders, styling, <code>min/max-width/height</code> constraints, transitions</li>
 		<li><strong>No JS knowledge required</strong> Everything configurable via HTML!</li>
-		<li><strong>Works in all modern browsers</strong> Chrome, FF 3.6, IE9, Opera, Safari, Android &amp; more.</li>
+		<li><strong><a href="#browser-support">Works in all modern browsers</a></strong> Chrome, FF 3.6, IE9, Opera, Safari, Android &amp; more.</li>
 	</ul>
 </section>
 
@@ -46,7 +46,7 @@
 	<label>Textarea:
 		<textarea placeholder="Type here too"></textarea>
 	</label>
-	
+
 	<label>Input with placeholder:
 		<input placeholder="Type some text" />
 	</label>
@@ -69,7 +69,7 @@
 <section id="usage">
 	<h1>Usage</h1>
 
-	<p>Just include the script anywhere in the page, ideally right before the closing <code>&lt;/body></code> tag:</p>
+	<p>Just include the script anywhere in the page:</p>
 	<pre><code class="language-markup">&lt;script src="<a href="stretchy.min.js" download>stretchy.min.js</a>" async>&lt;/script></code></pre>
 
 	<p>By default, it applies to all <code>&lt;textarea></code>s, <code>&lt;select></code> menus with no <code>size</code> attribute and <code>&lt;input></code> elements that are text fields (e.g. with no <code>type</code> attribute, or with one equal to <code>text</code>, <code>tel</code>, <code>email</code>, <code>url</code>).</p>
@@ -84,7 +84,7 @@
 
 	<p>If you want to avoid modifying the markup, you can use JavaScript instead, as long as this is set before <code>DOMContentLoaded</code> fires:</p>
 
-	<pre><code class="language-javascript">Stretchy.selector.filter = ".foo, .foo *";</code></pre>
+	<pre><code class="language-javascript">Stretchy.selectors.filter = ".foo, .foo *";</code></pre>
 </section>
 
 <section id="api">
@@ -95,13 +95,13 @@
 	<p>If needed, these are Stretchy’s API methods:</p>
 
 	<dl>
-		<dt>Stretchy.apply(element)</dt>
+		<dt>Stretchy.resize(element)</dt>
 		<dd>Autosize one element based on its content. Note that this does not set up any event listeners, it just calculates and sets the right dimension (width or height, depending on the type of control) once.</dd>
 
-		<dt>Stretchy.applyAll(elements)</dt>
-		<dd>Apply <code>Stretchy.apply()</code> to a collection of elements, or all Stretchy is set to apply to, if no argument is provided.</dd>
-		
-		<dt>Stretchy.applies()</dt>
+		<dt>Stretchy.resizeAll(elements)</dt>
+		<dd>Apply <code>Stretchy.resize()</code> to a collection of elements, or all Stretchy is set to apply to, if no argument is provided.</dd>
+
+		<dt>Stretchy.resizes()</dt>
 		<dd>Can Stretchy be used on this particular element? (checks if element is in the DOM, if it's of the right type and if it matches the selector filter provided by <code>data-stretchy-selector</code>, if the attribute is set.</dd>
 
 		<dt>Stretchy.active</dt>
@@ -109,18 +109,35 @@
 	</dl>
 </section>
 
+<section id="browser-support">
+	<h1>Browser Support Notes</h1>
+
+	<ul>
+		<li>On <a href="http://caniuse.com/#feat=mutationobserver">browsers that do not support mutation observers</a>, you have to manually call <code>Stretchy.resize()</code> on new elements. </li>
+		<li>IE has an issue with <code>&lt;input></code> elements, due to it misreporting <code>scrollWidth</code>. If this matters to you, you can use <a href="https://github.com/gregwhitworth/scrollWidthPolyfill">this polyfill</a> by Greg Whitworth (under development).</li>
+	</ul>
+</section>
+
 <footer>
-	Made with &hearts; by <a href="http://lea.verou.me">Lea Verou</a> &bull; <a href="http://lea.verou.me/2015/07/stretchy-form-element-autosizing-the-way-it-should-be">About</a>
+	Made with &hearts; by <a href="http://lea.verou.me">Lea Verou</a>
+	&bull; <a href="http://lea.verou.me/2015/07/stretchy-form-element-autosizing-the-way-it-should-be">About</a>
+	&bull; <a href="javascript:(function(script){script.src='https://leaverou.github.io/stretchy/stretchy.min.js';document.body.appendChild(script);})(document.createElement('script'))">Use as a bookmarklet!</a>
+
 	<a href="https://github.com/LeaVerou/stretchy" class="github-ribbon">Fork me on GitHub</a>
+
+	<div class="social-media">
+		<a href="https://twitter.com/share" class="twitter-share-button" data-via="LeaVerou">Tweet</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+		</script>
+		<iframe src="https://ghbtns.com/github-btn.html?user=leaverou&amp;repo=stretchy&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="97" height="20"></iframe>
+		<iframe style='vertical-align: middle' src="https://ghbtns.com/github-btn.html?user=leaverou&amp;repo=stretchy&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
+	</div>
 </footer>
 
-<div class="twitter">
-<a href="https://twitter.com/share" class="twitter-share-button" data-via="LeaVerou">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</script>
 
-<script async src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=leaveroume" id="_carbonads_js"></script>
-	
+
+<script async src="https://cdn.carbonads.com/carbon.js?zoneid=1673&amp;serve=C6AILKT&amp;placement=leaveroume" id="_carbonads_js"></script>
+
 <script src="stretchy.js"></script>
 </body>
 </html>
