@@ -29,7 +29,7 @@ var _ = self.Stretchy = {
 	},
 
 	// Script element this was included with, if any
-	script: $$("script").pop(),
+	script: document.currentScript || $$("script").pop(),
 
 	// Autosize one element. The core of Stretchy.
 	resize: function(element) {
