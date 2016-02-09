@@ -82,9 +82,11 @@
 
 	<p>If you specify the <code>data-stretchy-filter</code> attribute on multiple elements, the last value (in source order) wins. <code>data-filter</code> directly on Stretchy’s <code>&lt;script></code> element takes priority over any <code>data-stretchy-filter</code> declaration.</p>
 
-	<p>If you want to avoid modifying the markup, you can use JavaScript instead, as long as this is set before <code>DOMContentLoaded</code> fires:</p>
+	<p>If you want to avoid modifying the markup, you can use JavaScript instead:</p>
 
 	<pre><code class="language-javascript">Stretchy.selectors.filter = ".foo, .foo *";</code></pre>
+
+	<p>Note that to prevent Stretchy from being applied to elements that don’t match the selector at all, you would need to run that line before <code>DOMContentLoaded</code> fires.</p>
 </section>
 
 <section id="api">
