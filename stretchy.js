@@ -136,8 +136,8 @@ var _ = self.Stretchy = {
 	},
 
 	init: function(){
-		_.selectors.filter = Stretchy.selectors.filter || _.script.getAttribute("data-filter") ||
-		                     ($$("[data-stretchy-filter]").pop() || document.body).getAttribute("data-stretchy-filter") || "*";
+		_.selectors.filter = _.script.getAttribute("data-filter") ||
+		                     ($$("[data-stretchy-filter]").pop() || document.body).getAttribute("data-stretchy-filter") || Stretchy.selectors.filter || "*";
 
 		_.resizeAll();
 	},
