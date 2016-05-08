@@ -78,16 +78,18 @@ var _ = self.Stretchy = {
 			element.style.width = width + "px";
 		}
 		else if (type == "select") {
+			var selectedIndex = element.selectedIndex > 0? element.selectedIndex : 0;
+
 			// Need to use dummy element to measure :(
 			var option = document.createElement("_");
-			option.textContent = element.options[element.selectedIndex].textContent;
+			option.textContent = element.options[selectedIndex].textContent;
 			element.parentNode.insertBefore(option, element.nextSibling);
 
 			// The name of the appearance property, as it might be prefixed
 			var appearance;
 
 			for (var property in cs) {
-				if (!/^(width|webkitLogicalWidth)$/.test(property)) {
+				if (!/^(width|webkitLogicalWidth|length)$/.test(property)) {
 					//console.log(property, option.offsetWidth, cs[property]);
 					option.style[property] = cs[property];
 
