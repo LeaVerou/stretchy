@@ -89,9 +89,10 @@ var _ = self.Stretchy = {
 			var appearance;
 
 			for (var property in cs) {
-				if (!/^(width|webkitLogicalWidth|length)$/.test(property)) {
+				var value = cs[property];
+				if (!/^(width|webkitLogicalWidth|length)$/.test(property) && typeof value == "string") {
 					//console.log(property, option.offsetWidth, cs[property]);
-					option.style[property] = cs[property];
+					option.style[property] = value;
 
 					if (/appearance$/i.test(property)) {
 						appearance = property;
