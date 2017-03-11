@@ -72,6 +72,9 @@ var _ = self.Stretchy = {
 				else if (cs.boxSizing == "padding-box") {
 					offset = element.clientWidth;
 				}
+				else if (cs.boxSizing == "content-box") {
+					offset = parseFloat(cs.minWidth);
+				}
 
 				// Safari misreports scrollWidth, so we will instead set scrollLeft to a
 				// huge number, and read that back to see what it was clipped to
