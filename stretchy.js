@@ -54,7 +54,7 @@ var _ = self.Stretchy = {
 				offset = element.offsetHeight;
 			}
 			else if (cs.boxSizing == "content-box") {
-				offset = -element.clientHeight;
+				offset = -element.clientHeight + parseFloat(cs.minHeight);
 			}
 
 			element.style.height = element.scrollHeight + offset + "px";
