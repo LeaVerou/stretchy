@@ -46,31 +46,37 @@ var _ = self.Stretchy = {
 		}
 
 		var type = element.nodeName.toLowerCase();
+		var hasTransition = !!parseFloat(cs.transitionDuration);
+		var clonedNode = hasTransition ? element.cloneNode(true) : element;
+		if (hasTransition) {
+			clonedNode.style.transition = 'none';
+			document.body.appendChild(clonedNode);
+		}
 
 		if (type == "textarea") {
-			element.style.height = "0";
+			clonedNode.style.height = "0";
 
 			if (cs.boxSizing == "border-box") {
-				offset = element.offsetHeight;
+				offset = clonedNode.offsetHeight;
 			}
 			else if (cs.boxSizing == "content-box") {
-				offset = -element.clientHeight + parseFloat(cs.minHeight);
+				offset = -clonedNode.clientHeight + parseFloat(cs.minHeight);
 			}
 
-			element.style.height = element.scrollHeight + offset + "px";
+			element.style.height = clonedNode.scrollHeight + offset + "px";
 		}
 		else if(type == "input") {
 			// First test that it is actually visible, otherwise all measurements are off
-			element.style.width = "1000px";
+			clonedNode.style.width = "1000px";
 
-			if (element.offsetWidth) {
-				element.style.width = "0";
+			if (clonedNode.offsetWidth) {
+				clonedNode.style.width = "0";
 
 				if (cs.boxSizing == "border-box") {
-					offset = element.offsetWidth;
+					offset = clonedNode.offsetWidth;
 				}
 				else if (cs.boxSizing == "padding-box") {
-					offset = element.clientWidth;
+					offset = clonedNode.clientWidth;
 				}
 				else if (cs.boxSizing == "content-box") {
 					offset = parseFloat(cs.minWidth);
@@ -78,15 +84,15 @@ var _ = self.Stretchy = {
 
 				// Safari misreports scrollWidth, so we will instead set scrollLeft to a
 				// huge number, and read that back to see what it was clipped to
-				element.scrollLeft = 1e+10;
+				clonedNode.scrollLeft = 1e+10;
 
-				var width = Math.max(element.scrollLeft + offset, element.scrollWidth - element.clientWidth);
+				var width = Math.max(clonedNode.scrollLeft + offset, clonedNode.scrollWidth - clonedNode.clientWidth);
 
 				element.style.width = width + "px";
 			}
 			else {
 				// Element is invisible, just set to something reasonable
-				element.style.width = element.value.length + 1 + "ch";
+				element.style.width = clonedNode.value.length + 1 + "ch";
 			}
 		}
 		else if (type == "select") {
@@ -94,8 +100,8 @@ var _ = self.Stretchy = {
 
 			// Need to use dummy element to measure :(
 			var option = document.createElement("_");
-			option.textContent = element.options[selectedIndex].textContent;
-			element.parentNode.insertBefore(option, element.nextSibling);
+			option.textContent = clonedNode.options[selectedIndex].textContent;
+			clonedNode.parentNode.insertBefore(option, clonedNode.nextSibling);
 
 			// The name of the appearance property, as it might be prefixed
 			var appearance;
@@ -115,11 +121,13 @@ var _ = self.Stretchy = {
 			option.style.width = "";
 
 			if (option.offsetWidth > 0) {
-				element.style.width = option.offsetWidth + "px";
+				clonedNode.style.width = option.offsetWidth + "px";
 
 				if (!cs[appearance] || cs[appearance] !== "none") {
 					// Account for arrow
-					element.style.width = "calc(" + element.style.width + " + 2em)";
+					element.style.width = "calc(" + clonedNode.style.width + " + 2em)";
+				} else {
+					element.style.width = clonedNode.style.width;
 				}
 			}
 
@@ -129,6 +137,10 @@ var _ = self.Stretchy = {
 
 		if (empty) {
 			element.value = "";
+		}
+
+		if (hasTransition) {
+			document.body.removeChild(clonedNode);
 		}
 	},
 
