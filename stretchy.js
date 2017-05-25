@@ -42,8 +42,8 @@ var _ = self.Stretchy = {
 		var empty;
 
 		if (!element.value && element.placeholder) {
-			element.value = element.placeholder;
 			empty = true;
+			element.value = element.placeholder;
 		}
 
 		var type = element.nodeName.toLowerCase();
