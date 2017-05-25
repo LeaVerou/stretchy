@@ -39,9 +39,10 @@ var _ = self.Stretchy = {
 
 		var cs = getComputedStyle(element);
 		var offset = 0;
+		var empty;
 
 		if (!element.value && element.placeholder) {
-			var empty = true;
+			empty = true;
 			element.value = element.placeholder;
 		}
 
