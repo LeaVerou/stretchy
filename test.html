@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Stretchy Tests</title>
+	<link rel="stylesheet" href="https://test.mavo.io/style.css" />
+	<style>
+		input, textarea, select {
+			/* Force custom rendering */
+			font: inherit;
+			background: transparent;
+			border: 1px solid rgba(0,0,0,.5);
+		}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/blissfuljs/1.0.4/bliss.min.js"></script>
+</head>
+<body>
+
+<h1>Stretchy Tests</h1>
+
+<section>
+	<h1>Input</h1>
+
+	<table class="reftest" data-test="testHorizontalScroll">
+		<tr title="With placeholder">
+			<td>
+				<input placeholder="Type some text" />
+			</td>
+		</tr>
+		<tr title="No placeholder, intial value">
+			<td>
+				<input value="Some text" />
+			</td>
+		</tr>
+		<tr title="No placeholder, no initial value">
+			<td>
+				<input />
+			</td>
+		</tr>
+		<tr title="With autocomplete">
+			<td>
+				<input list="datalist" value="Ja" />
+				<datalist id="datalist">
+					<option>Java</option>
+					<option>JavaScript</option>
+					<option>J++</option>
+					<option>C++</option>
+					<option>Python</option>
+				</datalist>
+			</td>
+		</tr>
+	</table>
+</section>
+<script>
+function testHorizontalScroll(td) {
+	var input = $("input", td);
+
+	var previous = input.scrollLeft;
+
+	if (!previous) {
+		input.scrollLeft = 1;
+	}
+
+	var pass = input.scrollLeft == 0;
+	input.scrollLeft = previous;
+
+	return pass;
+}
+
+function testVerticalScroll(td) {
+	var input = $("textarea", td);
+
+	var previous = input.scrollTop;
+
+	if (!previous) {
+		input.scrollTop = 1;
+	}
+
+	var pass = input.scrollTop == 0;
+	input.scrollTop = previous;
+
+	return pass;
+}
+</script>
+
+<section>
+	<h1>Textarea</h1>
+
+	<table class="reftest" data-test="testVerticalScroll">
+		<tr title="Initial value">
+			<td>
+				<textarea value="Hello there"></textarea>
+			</td>
+		</tr>
+		<tr title="Placeholder">
+			<td>
+				<textarea placeholder="Type here too"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td title="No placeholder, no initial value">
+				<textarea></textarea>
+			</td>
+		</tr>
+	</table>
+</section>
+
+<section>
+	<h1>Select</h1>
+
+	<div>
+		<select>
+			<option>CSS</option>
+			<option>JavaScript</option>
+			<option>HTML</option>
+			<option>SVG</option>
+			<option>WAI-ARIA</option>
+		</select>
+	</div>
+</section>
+
+<script src="https://test.mavo.io/test.js"></script>
+<script src="stretchy.js"></script>
+
+</body>
+</html>

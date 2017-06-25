@@ -77,13 +77,25 @@ var _ = self.Stretchy = {
 					offset = parseFloat(cs.minWidth);
 				}
 
-				// Safari misreports scrollWidth, so we will instead set scrollLeft to a
-				// huge number, and read that back to see what it was clipped to
-				element.scrollLeft = 1e+10;
-
-				var width = Math.max(element.scrollLeft + offset, element.scrollWidth - element.clientWidth);
+				var width = Math.max(offset, element.scrollWidth - element.clientWidth);
 
 				element.style.width = width + "px";
+
+				// To bulletproof, we will set scrollLeft to a
+				// huge number, and read that back to see what it was clipped to
+				// and increment width by that much, iteratively
+
+				for (var i=0; i<10; i++) { // max iterations
+					element.scrollLeft = 1e+10;
+
+					if (element.scrollLeft == 0) {
+						break;
+					}
+
+					width += element.scrollLeft;
+
+					element.style.width = width + "px";
+				}
 			}
 			else {
 				// Element is invisible, just set to something reasonable

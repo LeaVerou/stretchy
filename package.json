@@ -4,7 +4,7 @@
   "description": "Form element autosizing, the way it should be.",
   "main": "stretchy.js",
   "scripts": {
-    "test": "npm test"
+    "test": "open test.html"
   },
   "repository": {
     "type": "git",
