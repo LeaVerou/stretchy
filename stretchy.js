@@ -184,6 +184,10 @@ else {
 	document.addEventListener("DOMContentLoaded", _.init);
 }
 
+window.addEventListener("load", function(){
+	_.resizeAll();
+});
+
 // Listen for changes
 var listener = function(evt) {
 	if (_.active) {
