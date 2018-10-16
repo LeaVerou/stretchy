@@ -60,7 +60,7 @@ var _ = self.Stretchy = {
 
 			element.style.height = element.scrollHeight + offset + "px";
 		}
-		else if(type == "input") {
+		else if (type == "input") {
 			// First test that it is actually visible, otherwise all measurements are off
 			element.style.width = "1000px";
 
@@ -116,7 +116,6 @@ var _ = self.Stretchy = {
 			for (var property in cs) {
 				var value = cs[property];
 				if (!/^(width|webkitLogicalWidth|length)$/.test(property) && typeof value == "string") {
-					//console.log(property, option.offsetWidth, cs[property]);
 					option.style[property] = value;
 
 					if (/appearance$/i.test(property)) {
