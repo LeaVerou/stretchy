@@ -165,9 +165,26 @@ var _ = self.Stretchy = {
 
 	init: function(){
 		_.selectors.filter = _.script.getAttribute("data-filter") ||
-		                     ($$("[data-stretchy-filter]").pop() || document.body).getAttribute("data-stretchy-filter") || Stretchy.selectors.filter || "*";
+		                     ($$("[data-stretchy-filter]").pop() || document.body).getAttribute("data-stretchy-filter") || _.selectors.filter;
 
 		_.resizeAll();
+
+		// Listen for new elements
+		if (self.MutationObserver && !_.observer) {
+			_.observer = new MutationObserver(function(mutations) {
+				if (_.active) {
+					mutations.forEach(function(mutation) {
+						if (mutation.type == "childList") {
+							_.resizeAll(mutation.addedNodes);
+						}
+					});
+				}
+			});
+			_.observer.observe(document.documentElement, {
+				childList: true,
+				subtree: true
+			});
+		}
 	},
 
 	$$: $$
@@ -177,7 +194,7 @@ var _ = self.Stretchy = {
 
 // DOM already loaded?
 if (document.readyState !== "loading") {
-	_.init();
+	requestAnimationFrame(_.init);
 }
 else {
 	// Wait for it
@@ -199,21 +216,5 @@ document.documentElement.addEventListener("input", listener);
 
 // Firefox fires a change event instead of an input event
 document.documentElement.addEventListener("change", listener);
-
-// Listen for new elements
-if (self.MutationObserver) {
-	(new MutationObserver(function(mutations) {
-		if (_.active) {
-			mutations.forEach(function(mutation) {
-				if (mutation.type == "childList") {
-					Stretchy.resizeAll(mutation.addedNodes);
-				}
-			});
-		}
-	})).observe(document.documentElement, {
-		childList: true,
-		subtree: true
-	});
-}
 
 })();
