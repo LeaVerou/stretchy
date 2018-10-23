@@ -103,6 +103,12 @@ var _ = self.Stretchy = {
 			}
 		}
 		else if (type == "select") {
+
+			//if select element is empty, do nothing
+			if (element.selectedIndex == -1) {
+				return;
+			}
+
 			var selectedIndex = element.selectedIndex > 0? element.selectedIndex : 0;
 
 			// Need to use dummy element to measure :(
