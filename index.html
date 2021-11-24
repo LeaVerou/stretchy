@@ -4,6 +4,7 @@
 
 <meta charset="UTF-8" />
 <title>Stretchy: Form element autosizing, the way it should be.</title>
+<link rel="icon" href="logo.svg#cat">
 <link rel="stylesheet" href="style.css" />
 
 </head>
@@ -56,6 +57,10 @@
 		<input value="Some text" />
 	</label>
 
+	<label>Number input:
+		<input type="number" value="-10" step="10" />
+	</label>
+
 	<label>Select:
 		<select>
 			<option>CSS</option>
@@ -72,12 +77,39 @@
 <section id="usage">
 	<h1>Usage</h1>
 
+	<h2 id="iife">Good ol’ &lt;script> element</h2>
+
+	<p>This method is optimal if you don't need much control, and would rather avoid writing any JS.</p>
+
 	<p>Just include the script anywhere in the page:</p>
-	<pre><code class="language-markup">&lt;script src="<a href="stretchy.min.js" download>stretchy.min.js</a>" async>&lt;/script></code></pre>
 
-	<p>By default, it applies to all <code>&lt;textarea></code>s, <code>&lt;select></code> menus with no <code>size</code> attribute and <code>&lt;input></code> elements that are text fields (e.g. with no <code>type</code> attribute, or with one equal to <code>text</code>, <code>tel</code>, <code>email</code>, <code>url</code>).</p>
+	<pre><code class="language-markup">&lt;script src="<a href="https://stretchy.verou.me/dist/stretchy.iife.min.js" download>https://stretchy.verou.me/dist/stretchy.iife.min.js</a>" async>&lt;/script></code></pre>
 
-	<p>To limit that set further you can use the <code>data-stretchy-filter</code> attribute, on any element. Note that this means you can use the attribute on the <code>&lt;script></code> element that calls Stretchy itself, in which case you can also shorten its name to <code>data-filter</code>.</p>
+	<p>If you include Stretchy this way it will run automatically and you don’t need to do anything else (unless you want to <a href="#filter">customize which elements it applies to</a>).</p>
+
+	<h2>ESM (v2.0.0+)</h2>
+
+	<p>This method is ideal if you are including Stretchy as a dependency on a larger project and want to prevent any side effects.</p>
+
+	<pre><code class="language-javascript">import * as Stretchy from <a href="https://stretchy.verou.me/dist/stretchy.min.js" download>https://stretchy.verou.me/dist/stretchy.min.js</a>";
+Stretchy.init();</code></pre>
+
+	<h2>CommonJS</h2>
+
+	<p>A CommonJS build is also available. <code>require("stretchy")</code> should work on Node.</p>
+</section>
+
+<section id="filter">
+	<h1>Which elements does Stretchy resize?</h1>
+
+	<p>By default, Stretchy resizes all <code>&lt;textarea></code>s, <code>&lt;select></code> menus with no <code>size</code> attribute and <code>&lt;input></code> elements that are text fields (e.g. with no <code>type</code> attribute, or with one equal to <code>text</code>, <code>tel</code>, <code>email</code>, <code>url</code>).</p>
+
+	<p>To limit that set further you can set an additional filter, via a CSS selector. There are two ways to specify a filter: via HTML attributes (if you'd prefer to avoid writing JS)
+		or via JS.</p>
+
+	<h2>Via HTML attributes:</h2>
+
+	<p>Use the <code>data-stretchy-filter</code> attribute, on any element. Note that this means you can use the attribute on the <code>&lt;script></code> element that calls Stretchy itself, in which case you can also shorten its name to <code>data-filter</code>.</p>
 
 	<p>For example, to restrict it to elements that either have the <code>foo</code> class or are inside another element that does, you could use <code>data-stretchy-filter=".foo, .foo *"</code> on an element or call Stretchy like this:</p>
 
@@ -85,11 +117,17 @@
 
 	<p>If you specify the <code>data-stretchy-filter</code> attribute on multiple elements, the last value (in source order) wins. <code>data-filter</code> directly on Stretchy’s <code>&lt;script></code> element takes priority over any <code>data-stretchy-filter</code> declaration.</p>
 
+	<h2>Via JS</h2>
+
 	<p>If you want to avoid modifying the markup, you can use JavaScript instead:</p>
 
 	<pre><code class="language-javascript">Stretchy.selectors.filter = ".foo, .foo *";</code></pre>
 
-	<p>Note that to prevent Stretchy from being applied to elements that don’t match the selector at all, you would need to run that line before <code>DOMContentLoaded</code> fires.</p>
+	<p>Note that if you are <a href="#iife">including Stretchy via a <code>&lt;script></code> element</a>, it will run as soon as the document is ready, which may be before you’ve set a filter.
+		You need to ensure that line runs <em>after Stretchy has loaded</em> (so that the <code>Stretchy</code> object is available) and <em>before the DOM is ready</em>.
+		To avoid this hassle, I'd recommend using attributes to set the filter if you include Stretchy that way, or <a href="#esm">including Stretchy as a module</a> if you want
+			to customize its settings via JS.
+	</p>
 </section>
 
 <section id="api">
@@ -100,6 +138,9 @@
 	<p>If needed, these are Stretchy’s API methods:</p>
 
 	<dl>
+		<dt>Stretchy.init([root])</dt>
+		<dd>Resize controls inside a given element, and monitor for changes.</dd>
+
 		<dt>Stretchy.resize(element)</dt>
 		<dd>Autosize one element based on its content. Note that this does not set up any event listeners, it just calculates and sets the right dimension (width or height, depending on the type of control) once.</dd>
 
@@ -109,8 +150,11 @@
 		<dt>Stretchy.resizes()</dt>
 		<dd>Can Stretchy be used on this particular element? (checks if element is in the DOM, if it's of the right type and if it matches the selector filter provided by <code>data-stretchy-selector</code>, if the attribute is set.</dd>
 
+		<dt>Stretchy.selectors.filter</dt>
+		<dd>CSS selector that elements need to match to be resized.</dd>
+
 		<dt>Stretchy.active</dt>
-		<dd>Boolean. Set to <code>false</code> to temporarily disable Stretchy.</dd>
+		<dd>Boolean. Set to <code>false</code> to temporarily disable Stretchy globally.</dd>
 	</dl>
 </section>
 
@@ -142,6 +186,6 @@
 
 <script async src="https://cdn.carbonads.com/carbon.js?zoneid=1673&amp;serve=C6AILKT&amp;placement=leaveroume" id="_carbonads_js"></script>
 
-<script src="stretchy.js"></script>
+<script src="dist/stretchy.iife.js" async></script>
 </body>
 </html>

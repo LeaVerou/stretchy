@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 200">
-<style>	
+<style>
 	@import url("style.css");
 
 	text {
@@ -11,6 +11,10 @@
 	#cat {
 		fill: hsl(40, 60%, 90%);
 		mask: url(#text);
+	}
+
+	#cat:target {
+		fill: hsl(10, 50%, 40%);
 	}
 </style>
 <defs>

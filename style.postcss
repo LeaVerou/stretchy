@@ -1,10 +1,10 @@
-// Colors
-$accent1: hsl(185, 40%, 50%); // turquoise
-$accent2: hsl(10, 50%, 40%); // dark red
-$base: hsl(40, 60%, 90%); // beige
-
 @import url(https://fonts.googleapis.com/css?family=Arvo:400,700|Damion);
-@import "_svg";
+
+:root {
+	--accent1: hsl(185, 40%, 50%); /* turquoise */
+	--accent2: hsl(10, 50%, 40%); /* dark red */
+	--base-color: hsl(40, 60%, 90%); /* beige */
+}
 
 body {
 	font: 100%/1.5 Rockwell, Arvo, Helvetica Neue, sans-serif;
@@ -22,10 +22,11 @@ input, textarea, select {
 	background: transparent;
 	color: inherit;
 	box-sizing: border-box;
-}
 
-::-webkit-input-placeholder { color: hsla(0,0%,100%,.5); }
-::-moz-placeholder { color: hsla(0,0%,100%,.5); }
+	&::placeholder {
+		color: hsla(0,0%,100%,.5);
+	}
+}
 
 h1 {
 	margin: 0;
@@ -39,8 +40,8 @@ a {
 header, section, footer {
 	max-width: 900px;
 	padding: 1.5em calc(50% - 450px);
-	background: $accent1;
-	color: $base;
+	background: var(--accent1);
+	color: var(--base-color);
 }
 
 @media (max-width: 950px) {
@@ -50,7 +51,6 @@ header, section, footer {
 }
 
 header {
-	display: -webkit-flex;
 	display: flex;
 
 	& > h1 {
@@ -60,7 +60,7 @@ header {
 		margin-left: -2em;
 	}
 
-	iframe {
+	& iframe {
 		display: block;
 		width: 100%;
 		border: 0;
@@ -77,7 +77,7 @@ header {
 		margin: 0;
 	}
 
-		p {
+		& p {
 			-webkit-flex: 1;
 			flex: 1;
 			margin: 0;
@@ -87,19 +87,19 @@ header {
 			letter-spacing: -.03em;
 		}
 
-		nav {
+		& nav {
 			font: 160% Damion, cursive;
 
-			ul {
+			& ul {
 				margin: 0;
 			}
 
-			li {
+			& li {
 				display: inline;
 				list-style: none;
 			}
 
-			a {
+			& a {
 				display: inline-block;
 				padding: .15em .4em .15em .3em;
 				border-radius: .3em;
@@ -108,66 +108,70 @@ header {
 				line-height: 1;
 			}
 
-			a[href="stretchy.js"],
-			a:hover {
-				border-color: $base;
+			& a[href="stretchy.js"],
+			& a:hover {
+				border-color: var(--base-color);
 			}
 
-			a:hover {
-				background: $base;
-				color: $accent1;
+			& a:hover {
+				background: var(--base-color);
+				color: var(--accent1);
 			}
 		}
 }
 
 section:nth-of-type(odd) {
-	background: $base;
+	background: var(--base-color);
 	color: black;
 
-	h1 {
-		color: $accent2;
+	& h1 {
+		color: var(--accent2);
 	}
 }
 
 section:nth-of-type(even) {
 	padding-top: 2em;
 	padding-bottom: 2em;
-	background: svg(svg-polygon($base, "0,0 100,100 200,0"), "0 0 200 100") top / 1em auto repeat-x,
-	            svg(svg-polygon($base, "0,100 100,0 200,100"), "0 0 200 100") bottom / 1em auto repeat-x;
-	background-color: $accent2;
+	--next-section-background: var(--base-color);
+	--prev-section-background: var(--base-color);
+	background: conic-gradient(from -45deg at bottom, var(--prev-section-background, transparent) 25%, transparent 0 100%) top,
+	            conic-gradient(from -45deg at bottom, transparent 25%, var(--next-section-background, transparent) 0 100%) bottom;
+	background-color: var(--accent2);
+	background-size: 1em .5em;
+	background-repeat: repeat-x;
 
-	h1 {
-		color: $base;
+	& h1 {
+		color: var(--base-color);
 	}
 
 	&:last-of-type {
-		background-image: svg(svg-polygon($base, "0,0 100,100 200,0"), "0 0 200 100"),
-		                  svg(svg-polygon($accent1, "0,100 100,0 200,100"), "0 0 200 100");
+		--next-section-background: var(--accent1);
 	}
 }
 
+
+
 #features {
-	ul {
+	& ul {
 		padding: 0;
 		list-style: none;
 	}
 
 	@media (min-width: 600px) {
-		ul {
-			-webkit-columns: 2;
-			-moz-columns: 2;
+		& ul {
 			columns: 2;
 		}
 	}
 
-		li {
+		& li {
 			position: relative;
 			break-inside: avoid;
 			-webkit-column-break-inside: avoid;
 			font-size: 70%;
 			margin: 0 0 1em 2.5em;
 		}
-			li::before {
+
+			& li::before {
 				content: "✓";
 				position: absolute;
 				top: .05em;
@@ -175,14 +179,14 @@ section:nth-of-type(even) {
 				margin-right: .1em;
 				font-size: 320%;
 				line-height: 1;
-				color: $accent1;
+				color: var(--accent1);
 			}
 
-			li strong {
+			& li strong {
 				display: block;
 				font-size: 150%;
 
-				a:not(:hover) {
+				& a:not(:hover) {
 					text-decoration: none;
 				}
 			}
@@ -191,37 +195,33 @@ section:nth-of-type(even) {
 #examples {
 	overflow: hidden;
 
-	label,
-	textarea {
+	& label,
+	& textarea {
 		display: block;
 	}
 
-	textarea {
-
-	}
-
-	label:first-of-type {
+	& label:first-of-type {
 		float: right;
 		margin-top: -.6em;
 	}
 
-	label {
+	& label {
 		margin: 1em 0;
 	}
 }
 
 #api {
-	dt {
+	& dt {
 		font-weight: bold;
 	}
 
-	dd + dt {
+	& dd + dt {
 		margin-top: 1em;
 	}
 }
 
 footer {
-	background: $accent1 url(logo.svg) right / auto 100% no-repeat;
+	background: var(--accent1) url(logo.svg) right / auto 100% no-repeat;
 	background-origin: content-box;
 }
 
@@ -232,9 +232,9 @@ footer {
 	transform: rotate(90deg) translateX(70.71067814%) rotate(-90deg) rotate(-45deg) translateY(-100%);
 	transform-origin: 0 0;
 	padding: .4em 3em;
-	background: $accent2;
+	background: var(--accent2);
 	text-decoration: none;
-	color: $base;
+	color: var(--base-color);
 	box-shadow: 0 .1em 0 .1em rgba(0,0,0,.15);
 
 	&:hover {
@@ -244,8 +244,6 @@ footer {
 }
 
 .social-media {
-
-
 	@media (min-width: 1150px) {
 		& {
 			position: absolute;

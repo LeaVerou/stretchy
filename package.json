@@ -2,8 +2,20 @@
   "name": "stretchy",
   "version": "1.0.0",
   "description": "Form element autosizing, the way it should be.",
-  "main": "stretchy.js",
+  "main": "src/stretchy.js",
+  "exports": {
+    "import": "./dist/stretchy.js",
+    "require": "./dist/stretchy.cjs.js"
+  },
   "scripts": {
+    "build:css": "npx postcss **/*.postcss ./*.postcss --base . --dir . --ext .css",
+    "build:s": "rollup -c",
+    "build": "npm run build:css && npm run build:js",
+
+    "watch:css": "npx postcss **/*.postcss ./*.postcss --base . --dir . --ext .css --watch",
+    "watch:js": "rollup -c --watch",
+    "watch": "npm run watch:css & npm run watch:js",
+
     "test": "open test.html"
   },
   "repository": {
@@ -17,13 +29,12 @@
   },
   "homepage": "https://github.com/LeaVerou/stretchy",
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.0.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^2.6.1",
-    "gulp-uglify": "^3.0.0",
-    "gulp-util": "^3.0.7"
+    "postcss": "^8.3.9",
+    "postcss-cli": "^9.0.1",
+    "postcss-custom-selectors": "^6.0.0",
+    "postcss-nesting": "^8.0.1",
+    "@rollup/plugin-babel": "^5.3.0",
+    "rollup": "^2.58.3",
+    "rollup-plugin-terser": "^7.0.2"
   }
 }
