@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build:css": "npx postcss **/*.postcss ./*.postcss --base . --dir . --ext .css",
-    "build:s": "rollup -c",
+    "build:js": "rollup -c",
     "build": "npm run build:css && npm run build:js",
 
     "watch:css": "npx postcss **/*.postcss ./*.postcss --base . --dir . --ext .css --watch",

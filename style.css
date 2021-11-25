@@ -282,3 +282,7 @@ footer {
     display: block;
     text-decoration: none;
 }
+
+md-block:not([rendered]) {
+	white-space: pre-line;
+}
