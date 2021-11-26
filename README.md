@@ -60,6 +60,17 @@ Stretchy.init();
 
 A CommonJS build is also available. `require("stretchy")` should work on Node.
 
+## Local files
+
+All three of the above methods can be used with your own local files as well.
+You can download Stretchy [here](https://www.jsdelivr.com/package/npm/stretchy).
+
+npm works like you’d expect too:
+
+```
+npm install stretchy
+```
+
 </section>
 
 </section>
