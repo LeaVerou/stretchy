@@ -20,16 +20,16 @@ export function resize (element) {
 		return;
 	}
 
-	var cs = getComputedStyle(element);
-	var offset = 0;
-	var empty;
+	let cs = getComputedStyle(element);
+	let offset = 0;
+	let empty;
 
 	if (!element.value && element.placeholder) {
 		empty = true;
 		element.value = element.placeholder;
 	}
 
-	var type = element.nodeName.toLowerCase();
+	let type = element.nodeName.toLowerCase();
 
 	if (type == "textarea") {
 		element.style.height = "0";
@@ -60,7 +60,7 @@ export function resize (element) {
 				offset = parseFloat(cs.minWidth);
 			}
 
-			var width = Math.max(offset, element.scrollWidth - element.clientWidth);
+			let width = Math.max(offset, element.scrollWidth - element.clientWidth);
 
 			element.style.width = width + "px";
 
@@ -68,7 +68,7 @@ export function resize (element) {
 			// huge number, and read that back to see what it was clipped to
 			// and increment width by that much, iteratively
 
-			for (var i=0; i<10; i++) { // max iterations
+			for (let i=0; i<10; i++) { // max iterations
 				element.scrollLeft = 1e+10;
 
 				if (element.scrollLeft == 0) {
@@ -91,18 +91,18 @@ export function resize (element) {
 			return;
 		}
 
-		var selectedIndex = element.selectedIndex > 0? element.selectedIndex : 0;
+		let selectedIndex = element.selectedIndex > 0? element.selectedIndex : 0;
 
 		// Need to use dummy element to measure :(
-		var option = document.createElement("_");
+		let option = document.createElement("_");
 		option.textContent = element.options[selectedIndex].textContent;
 		element.parentNode.insertBefore(option, element.nextSibling);
 
 		// The name of the appearance property, as it might be prefixed
-		var appearance;
+		let appearance;
 
-		for (var property in cs) {
-			var value = cs[property];
+		for (let property in cs) {
+			let value = cs[property];
 			if (!/^(width|webkitLogicalWidth|length)$/.test(property) && typeof value == "string" && property in option.style) {
 				option.style[property] = value;
 
@@ -119,7 +119,7 @@ export function resize (element) {
 
 			if (!cs[appearance] || cs[appearance] !== "none") {
 				// Account for arrow
-				element.style.width = "calc(" + element.style.width + " + 2em)";
+				element.style.width = "calc(" + element.style.width + " + 2.1em)";
 			}
 		}
 
