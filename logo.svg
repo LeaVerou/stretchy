@@ -5,7 +5,7 @@
 
 	text {
 		fill: black;
-		font: 75.3px Damion, cursive;
+		font: 75.3px Damion, Marker Felt, Comic Sans MS, cursive;
 	}
 
 	#cat {
