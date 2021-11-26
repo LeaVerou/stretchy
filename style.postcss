@@ -9,6 +9,9 @@
 body {
 	font: 100%/1.5 Rockwell, Arvo, Helvetica Neue, sans-serif;
 	margin: 0;
+	display: flex;
+	flex-flow: column;
+
 }
 
 code, pre {
@@ -24,7 +27,8 @@ input, textarea, select {
 	box-sizing: border-box;
 
 	&::placeholder {
-		color: hsla(0,0%,100%,.5);
+		color: inherit;
+		opacity: .4;
 	}
 }
 
@@ -40,6 +44,9 @@ a {
 header, section, footer {
 	max-width: 900px;
 	padding: 1.5em calc(50% - 450px);
+}
+
+header, footer {
 	background: var(--accent1);
 	color: var(--base-color);
 }
@@ -120,16 +127,24 @@ header {
 		}
 }
 
-section:nth-of-type(odd) {
+body > section,
+md-block > section,
+#features {
 	background: var(--base-color);
 	color: black;
+	order: 3;
+
+	&:last-of-type {
+		--next-section-background: var(--accent1);
+	}
 
 	& h1 {
 		color: var(--accent2);
 	}
 }
 
-section:nth-of-type(even) {
+md-block > section:nth-of-type(odd),
+#examples {
 	padding-top: 2em;
 	padding-bottom: 2em;
 	--next-section-background: var(--base-color);
@@ -139,19 +154,20 @@ section:nth-of-type(even) {
 	background-color: var(--accent2);
 	background-size: 1em .5em;
 	background-repeat: repeat-x;
+	color: var(--base-color);
 
 	& h1 {
 		color: var(--base-color);
 	}
 
-	&:last-of-type {
-		--next-section-background: var(--accent1);
-	}
+
 }
 
 
 
 #features {
+	order: 1;
+
 	& ul {
 		padding: 0;
 		list-style: none;
@@ -193,6 +209,7 @@ section:nth-of-type(even) {
 }
 
 #examples {
+	order: 2;
 	overflow: hidden;
 
 	& label,
@@ -207,16 +224,6 @@ section:nth-of-type(even) {
 
 	& label {
 		margin: 1em 0;
-	}
-}
-
-#api {
-	& dt {
-		font-weight: bold;
-	}
-
-	& dd + dt {
-		margin-top: 1em;
 	}
 }
 
@@ -277,6 +284,14 @@ footer {
 .carbon-text {
     display: block;
     text-decoration: none;
+}
+
+md-block {
+	display: contents;
+}
+
+md-block header {
+	display: none;
 }
 
 md-block:not([rendered]) {

@@ -9,6 +9,9 @@
 body {
 	font: 100%/1.5 Rockwell, Arvo, Helvetica Neue, sans-serif;
 	margin: 0;
+	display: flex;
+	flex-flow: column;
+
 }
 
 code, pre {
@@ -25,7 +28,8 @@ input, textarea, select {
 }
 
 input::placeholder, textarea::placeholder, select::placeholder {
-		color: hsla(0,0%,100%,.5);
+		color: inherit;
+		opacity: .4;
 	}
 
 h1 {
@@ -40,6 +44,9 @@ a {
 header, section, footer {
 	max-width: 900px;
 	padding: 1.5em calc(50% - 450px);
+}
+
+header, footer {
 	background: var(--accent1);
 	color: var(--base-color);
 }
@@ -120,16 +127,24 @@ header nav a:hover {
 				color: var(--accent1);
 			}
 
-section:nth-of-type(odd) {
+body > section,
+md-block > section,
+#features {
 	background: var(--base-color);
-	color: black
+	color: black;
+	order: 3
 }
 
-section:nth-of-type(odd) h1 {
+body > section:last-of-type, md-block > section:last-of-type, #features:last-of-type {
+		--next-section-background: var(--accent1);
+	}
+
+body > section h1, md-block > section h1, #features h1 {
 		color: var(--accent2);
 	}
 
-section:nth-of-type(even) {
+md-block > section:nth-of-type(odd),
+#examples {
 	padding-top: 2em;
 	padding-bottom: 2em;
 	--next-section-background: var(--base-color);
@@ -138,16 +153,21 @@ section:nth-of-type(even) {
 	            conic-gradient(from -45deg at bottom, transparent 25%, var(--next-section-background, transparent) 0 100%) bottom;
 	background-color: var(--accent2);
 	background-size: 1em .5em;
-	background-repeat: repeat-x
+	background-repeat: repeat-x;
+	color: var(--base-color)
+
+
 }
 
-section:nth-of-type(even) h1 {
+md-block > section:nth-of-type(odd) h1, #examples h1 {
 		color: var(--base-color);
 	}
 
-section:nth-of-type(even):last-of-type {
-		--next-section-background: var(--accent1);
-	}
+
+
+#features {
+	order: 1
+}
 
 
 
@@ -201,6 +221,7 @@ section:nth-of-type(even):last-of-type {
 				}
 
 #examples {
+	order: 2;
 	overflow: hidden
 }
 
@@ -216,14 +237,6 @@ section:nth-of-type(even):last-of-type {
 
 #examples label {
 		margin: 1em 0;
-	}
-
-#api dt {
-		font-weight: bold;
-	}
-
-#api dd + dt {
-		margin-top: 1em;
 	}
 
 footer {
@@ -281,6 +294,14 @@ footer {
 .carbon-text {
     display: block;
     text-decoration: none;
+}
+
+md-block {
+	display: contents;
+}
+
+md-block header {
+	display: none;
 }
 
 md-block:not([rendered]) {

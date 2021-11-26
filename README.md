@@ -6,7 +6,7 @@ Form element autosizing, the way it should be!
 
 </header>
 
-<section>
+<section id="features">
 
 # Features
 
@@ -28,7 +28,7 @@ Form element autosizing, the way it should be!
 
 <section id="iife">
 
-## Good ol’ `&lt;script>` element
+## Good ol’ `<script>` element
 
 This method is optimal if you don't need much control, and would rather avoid writing any JS.
 
@@ -57,7 +57,7 @@ Stretchy.init();
 
 <section id="cjs">
 
-## CommonJS
+## CommonJS (v2.0.0+)
 
 A CommonJS build is also available. `require("stretchy")` should work on Node.
 
@@ -69,28 +69,32 @@ A CommonJS build is also available. `require("stretchy")` should work on Node.
 
 # Which elements does Stretchy resize?
 
-By default, Stretchy resizes all `&lt;textarea>`s, `&lt;select>` menus with no `size` attribute and `&lt;input>` elements that are text fields (e.g. with no `type` attribute, or with one equal to `text`, `tel`, `email`, `url`).
+By default, Stretchy resizes all `<textarea>`s, `<select>` menus with no `size` attribute and `<input>` elements that are text fields (e.g. with no `type` attribute, or with one equal to `text`, `tel`, `email`, `url`).
 
 To limit that set further you can set an additional filter, via a CSS selector. There are two ways to specify a filter: via HTML attributes (if you'd prefer to avoid writing JS)
 	or via JS.
 
 ## Via HTML attributes:
 
-Use the `data-stretchy-filter` attribute, on any element. Note that this means you can use the attribute on the `&lt;script>` element that calls Stretchy itself, in which case you can also shorten its name to `data-filter`.
+Use the `data-stretchy-filter` attribute, on any element. Note that this means you can use the attribute on the `<script>` element that calls Stretchy itself, in which case you can also shorten its name to `data-filter`.
 
 For example, to restrict it to elements that either have the `foo` class or are inside another element that does, you could use `data-stretchy-filter=".foo, .foo *"` on an element or call Stretchy like this:
 
-<pre><code class="language-markup">&lt;script src="<a href="stretchy.min.js" download>stretchy.min.js</a>" data-filter=".foo, .foo *" async>&lt;/script>`</pre>
+```html
+<script src="stretchy.min.js" data-filter=".foo, .foo *" async></script>
+```
 
-If you specify the `data-stretchy-filter` attribute on multiple elements, the last value (in source order) wins. `data-filter` directly on Stretchy’s `&lt;script>` element takes priority over any `data-stretchy-filter` declaration.
+If you specify the `data-stretchy-filter` attribute on multiple elements, the last value (in source order) wins. `data-filter` directly on Stretchy’s `<script>` element takes priority over any `data-stretchy-filter` declaration.
 
 ## Via JS
 
 If you want to avoid modifying the markup, you can use JavaScript instead:
 
-<pre><code class="language-javascript">Stretchy.selectors.filter = ".foo, .foo *";`</pre>
+```javascript
+Stretchy.selectors.filter = ".foo, .foo *";
+```
 
-Note that if you are [including Stretchy via a `&lt;script>` element](#iife), it will run as soon as the document is ready, which may be before you’ve set a filter.
+Note that if you are [including Stretchy via a `<script>` element](#iife), it will run as soon as the document is ready, which may be before you’ve set a filter.
 	You need to ensure that line runs <em>after Stretchy has loaded</em> (so that the `Stretchy` object is available) and <em>before the DOM is ready</em>.
 	To avoid this hassle, I'd recommend using attributes to set the filter if you include Stretchy that way, or [including Stretchy as a module](#esm) if you want
 		to customize its settings via JS.
@@ -108,43 +112,31 @@ If needed, these are Stretchy’s API methods:
 | Property or Method | Description |
 |--------------------|-------------|
 | `init([root])` | Resize controls inside a given element, and monitor for changes. |
-| `Stretchy.resize(element)` | Autosize one element based on its content. Note that this does not set up any event listeners, it just calculates and sets the right dimension (width or height, depending on the type of control) once.
-| `Stretchy.resizeAll(elements | selector, [root])` |  |
-| `` |  |
-| `` |  |
-| `` |  |
-
-<dl>
-
-<dt>Stretchy.init([root])</dt>
-<dd></dd>
-
-<dt></dt>
-<dd></dd>
-
-<dt></dt>
-<dd>Apply <code>Stretchy.resize()</code> to a collection of elements, or all Stretchy is set to apply to, if no argument is provided.</dd>
-
-<dt>Stretchy.resizes()</dt>
-<dd>Can Stretchy be used on this particular element? (checks if element is in the DOM, if it's of the right type and if it matches the selector filter provided by <code>data-stretchy-selector</code>, if the attribute is set.</dd>
-
-<dt>Stretchy.selectors.filter</dt>
-<dd>CSS selector that elements need to match to be resized.</dd>
-
-<dt>Stretchy.active</dt>
-<dd>Boolean. Set to <code>false</code> to temporarily disable Stretchy globally.</dd>
-
-</dl>
+| `resize(element)` | Autosize one element based on its content. Note that this does not set up any event listeners, it just calculates and sets the right dimension (width or height, depending on the type of control) once.
+| `resizeAll([elements \| selector, [root]])` | Apply `Stretchy.resize()` to a collection of elements, or all Stretchy is set to apply to, if no argument is provided. |
+| `resizes(element)` | Can Stretchy be used on this particular element? (checks if element is in the DOM, if it's of the right type and if it matches the selector filter provided by `data-stretchy-selector`, if the attribute is set. |
+| `selectors.base` | CSS selector that elements need to match to be resized. |
+| `selectors.filter` | CSS selector that elements need to match to be resized. |
+| `active` | Boolean. Set to `false` to temporarily disable Stretchy globally.` |
 
 </section>
 
 <section id="v1-browser-support">
 
-# v1 Browser Support Notes
+# Browser support
+
+<md-block src=".browserslistrc" hmin="2">
+
+All modern browsers.
+For details, see [.browserslistrc](.browserslistrc)
+
+</md-block>
+
+## v1 Browser Support Notes
 
 Stretchy v1 worked in Chrome, FF 3.6, IE9, Opera, Safari, Android & more.
 
 - On [browsers that do not support mutation observers](http://caniuse.com/#feat=mutationobserver), you have to manually call `Stretchy.resize()` on new elements.
-- IE has an issue with `&lt;input>` elements, due to it misreporting `scrollWidth`. If this matters to you, you can use [this polyfill](https://github.com/gregwhitworth/scrollWidthPolyfill) by Greg Whitworth (under development).
+- IE has an issue with `<input>` elements, due to it misreporting `scrollWidth`. If this matters to you, you can use [this polyfill](https://github.com/gregwhitworth/scrollWidthPolyfill) by Greg Whitworth (under development).
 
 </section>

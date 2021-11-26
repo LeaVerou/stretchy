@@ -27,21 +27,6 @@
 	</div>
 </header>
 
-<section id="features">
-	<h1>Features</h1>
-
-	<ul>
-		<li><strong>Handles multiple types of form controls</strong> Textareas? Inputs? Select menus? You name it!</li>
-		<li><strong>Tiny footprint</strong> Less than 1.5KB minified and gzipped!</li>
-		<li><strong>Automatically accounts for newly added controls</strong> via mutation observers, where supported</li>
-		<li><strong>Restrict form controls by a selector</strong> …or don’t and autosize all your form controls!</li>
-		<li><strong>Completely standalone</strong> no jQuery or other dependencies</li>
-		<li><strong>Plays well with existing HTML/CSS</strong> Follows placeholders, styling, <code>min/max-width/height</code> constraints, transitions</li>
-		<li><strong>No JS knowledge required</strong> Everything configurable via HTML!</li>
-		<li><strong><a href="#browser-support">Works in all modern browsers</a></strong> Chrome, FF 3.6, IE9, Opera, Safari, Android &amp; more.</li>
-	</ul>
-</section>
-
 <section id="examples">
 	<h1>Examples</h1>
 
@@ -74,98 +59,9 @@
 	<p>More examples in the <a href="test.html">testsuite</a>.</p>
 </section>
 
-<section id="usage">
-	<h1>Usage</h1>
-
-	<h2 id="iife">Good ol’ &lt;script> element</h2>
-
-	<p>This method is optimal if you don't need much control, and would rather avoid writing any JS.</p>
-
-	<p>Just include the script anywhere in the page:</p>
-
-	<pre><code class="language-markup">&lt;script src="<a href="https://stretchy.verou.me/dist/stretchy.iife.min.js" download>https://stretchy.verou.me/dist/stretchy.iife.min.js</a>" async>&lt;/script></code></pre>
-
-	<p>If you include Stretchy this way it will run automatically and you don’t need to do anything else (unless you want to <a href="#filter">customize which elements it applies to</a>).</p>
-
-	<h2>ESM (v2.0.0+)</h2>
-
-	<p>This method is ideal if you are including Stretchy as a dependency on a larger project and want to prevent any side effects.</p>
-
-	<pre><code class="language-javascript">import * as Stretchy from <a href="https://stretchy.verou.me/dist/stretchy.min.js" download>https://stretchy.verou.me/dist/stretchy.min.js</a>";
-Stretchy.init();</code></pre>
-
-	<h2>CommonJS</h2>
-
-	<p>A CommonJS build is also available. <code>require("stretchy")</code> should work on Node.</p>
-</section>
-
-<section id="filter">
-	<h1>Which elements does Stretchy resize?</h1>
-
-	<p>By default, Stretchy resizes all <code>&lt;textarea></code>s, <code>&lt;select></code> menus with no <code>size</code> attribute and <code>&lt;input></code> elements that are text fields (e.g. with no <code>type</code> attribute, or with one equal to <code>text</code>, <code>tel</code>, <code>email</code>, <code>url</code>).</p>
-
-	<p>To limit that set further you can set an additional filter, via a CSS selector. There are two ways to specify a filter: via HTML attributes (if you'd prefer to avoid writing JS)
-		or via JS.</p>
-
-	<h2>Via HTML attributes:</h2>
-
-	<p>Use the <code>data-stretchy-filter</code> attribute, on any element. Note that this means you can use the attribute on the <code>&lt;script></code> element that calls Stretchy itself, in which case you can also shorten its name to <code>data-filter</code>.</p>
-
-	<p>For example, to restrict it to elements that either have the <code>foo</code> class or are inside another element that does, you could use <code>data-stretchy-filter=".foo, .foo *"</code> on an element or call Stretchy like this:</p>
-
-	<pre><code class="language-markup">&lt;script src="<a href="stretchy.min.js" download>stretchy.min.js</a>" data-filter=".foo, .foo *" async>&lt;/script></code></pre>
-
-	<p>If you specify the <code>data-stretchy-filter</code> attribute on multiple elements, the last value (in source order) wins. <code>data-filter</code> directly on Stretchy’s <code>&lt;script></code> element takes priority over any <code>data-stretchy-filter</code> declaration.</p>
-
-	<h2>Via JS</h2>
-
-	<p>If you want to avoid modifying the markup, you can use JavaScript instead:</p>
-
-	<pre><code class="language-javascript">Stretchy.selectors.filter = ".foo, .foo *";</code></pre>
-
-	<p>Note that if you are <a href="#iife">including Stretchy via a <code>&lt;script></code> element</a>, it will run as soon as the document is ready, which may be before you’ve set a filter.
-		You need to ensure that line runs <em>after Stretchy has loaded</em> (so that the <code>Stretchy</code> object is available) and <em>before the DOM is ready</em>.
-		To avoid this hassle, I'd recommend using attributes to set the filter if you include Stretchy that way, or <a href="#esm">including Stretchy as a module</a> if you want
-			to customize its settings via JS.
-	</p>
-</section>
-
-<section id="api">
-	<h1>JavaScript API</h1>
-
-	<p>Stretchy has a spartan API, since in most cases you don’t need to call it at all. Stretchy works via event delegation and detects new elements via mutation observers, so <strong>you do not need to call any API methods for adding new elements</strong> via scripting (e.g. AJAX).</p>
-
-	<p>If needed, these are Stretchy’s API methods:</p>
-
-	<dl>
-		<dt>Stretchy.init([root])</dt>
-		<dd>Resize controls inside a given element, and monitor for changes.</dd>
-
-		<dt>Stretchy.resize(element)</dt>
-		<dd>Autosize one element based on its content. Note that this does not set up any event listeners, it just calculates and sets the right dimension (width or height, depending on the type of control) once.</dd>
-
-		<dt>Stretchy.resizeAll(elements)</dt>
-		<dd>Apply <code>Stretchy.resize()</code> to a collection of elements, or all Stretchy is set to apply to, if no argument is provided.</dd>
-
-		<dt>Stretchy.resizes()</dt>
-		<dd>Can Stretchy be used on this particular element? (checks if element is in the DOM, if it's of the right type and if it matches the selector filter provided by <code>data-stretchy-selector</code>, if the attribute is set.</dd>
-
-		<dt>Stretchy.selectors.filter</dt>
-		<dd>CSS selector that elements need to match to be resized.</dd>
-
-		<dt>Stretchy.active</dt>
-		<dd>Boolean. Set to <code>false</code> to temporarily disable Stretchy globally.</dd>
-	</dl>
-</section>
-
-<section id="browser-support">
-	<h1>Browser Support Notes</h1>
-
-	<ul>
-		<li>On <a href="http://caniuse.com/#feat=mutationobserver">browsers that do not support mutation observers</a>, you have to manually call <code>Stretchy.resize()</code> on new elements. </li>
-		<li>IE has an issue with <code>&lt;input></code> elements, due to it misreporting <code>scrollWidth</code>. If this matters to you, you can use <a href="https://github.com/gregwhitworth/scrollWidthPolyfill">this polyfill</a> by Greg Whitworth (under development).</li>
-	</ul>
-</section>
+<md-block src="README.md">
+	[Documentation on GitHub](https://github.com/leaverou/stretchy/#readme)
+</md-block>
 
 <footer>
 	Made with &hearts; by <a href="http://lea.verou.me">Lea Verou</a>
