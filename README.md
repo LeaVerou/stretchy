@@ -1,6 +1,6 @@
 <header>
 
-<img src="https://stretchy.verou.me/logo.svg#red" width="200">
+<img src="https://stretchy.verou.me/logo.svg#notext" width="200">
 	
 # Stretchy
 
