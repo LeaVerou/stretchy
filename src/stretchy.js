@@ -135,7 +135,7 @@ export function resize(element) {
 export let active = true;
 
 // Autosize multiple elements
-export function resizeAll(elements, root = document.documentElement) {
+export function resizeAll (elements, root = document.documentElement) {
 	$$(elements || selectors.base, root).forEach(function (element) {
 		if (element.matches?.(selectors.filter)) {
 			resize(element);

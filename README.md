@@ -11,13 +11,15 @@ Form element autosizing, the way it should be!
 # Features
 
 - **Handles multiple types of form controls** Textareas? Inputs? Select menus? You name it!
-- **Tiny footprint** [Less than 1.5KB](https://bundlephobia.com/package/stretchy@1.0.0) minified and gzipped!
-- **Automatically accounts for newly added controls** via mutation observers, where supported
+- **Tiny footprint** [Less than 1.5KB](https://bundlephobia.com/package/stretchy) minified and gzipped!
+- **Automatically accounts for newly added controls** via mutation observers
 - **Restrict form controls by a selector** …or don’t and autosize all your form controls!
 - **Completely standalone** no jQuery or other dependencies
 - **Plays well with existing HTML/CSS** Follows placeholders, styling, `min/max-width/height` constraints, transitions
-- **No JS knowledge required** Everything configurable via HTML!
-- **[Works in all modern browsers](#browser-support)**
+- **No JS knowledge required** Everything can be configured just via HTML!
+- **[Works in all modern browsers](#browser-support)** ([v1 even works in old browsers](#v1-browser-support-notes))
+- **Written in ESM** Available in ESM, CJS, and good ol' globals
+- **Works in Shadow DOM** Use it in your web components!
 
 </section>
 
@@ -81,8 +83,7 @@ npm install stretchy
 
 By default, Stretchy resizes all `<textarea>`s, `<select>` menus with no `size` attribute and `<input>` elements that are text fields (e.g. with no `type` attribute, or with one equal to `text`, `tel`, `email`, `url`).
 
-To limit that set further you can set an additional filter, via a CSS selector. There are two ways to specify a filter: via HTML attributes (if you'd prefer to avoid writing JS)
-	or via JS.
+To limit that set further you can set an additional filter, via a CSS selector. There are two ways to specify a filter: via HTML attributes (if you'd prefer to avoid writing JS) or via JS.
 
 ## Via HTML attributes:
 
@@ -121,7 +122,7 @@ If needed, these are Stretchy’s API methods:
 
 | Property or Method | Description |
 |--------------------|-------------|
-| `init([root])` | Resize controls inside a given element, and monitor for changes. |
+| `init([root])` | Resize controls inside a given element, and monitor for changes. `root` can be any `Node`, including Shadow roots. |
 | `resize(element)` | Autosize one element based on its content. Note that this does not set up any event listeners, it just calculates and sets the right dimension (width or height, depending on the type of control) once.
 | `resizeAll([elements \| selector, [root]])` | Apply `Stretchy.resize()` to a collection of elements, or all Stretchy is set to apply to, if no argument is provided. |
 | `resizes(element)` | Can Stretchy be used on this particular element? (checks if element is in the DOM, if it's of the right type and if it matches the selector filter provided by `data-stretchy-selector`, if the attribute is set. |
