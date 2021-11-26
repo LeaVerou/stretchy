@@ -17,8 +17,7 @@ Form element autosizing, the way it should be!
 - **Completely standalone** no jQuery or other dependencies
 - **Plays well with existing HTML/CSS** Follows placeholders, styling, `min/max-width/height` constraints, transitions
 - **No JS knowledge required** Everything configurable via HTML!
-- **[Works in all modern browsers](https://github.com/LeaVerou/stretchy/blob/main/.browserslistrc)**
-	- [v1 works in old browsers too](#v1-browser-support)
+- **[Works in all modern browsers](#browser-support)**
 
 </section>
 
@@ -121,7 +120,7 @@ If needed, these are Stretchy’s API methods:
 
 </section>
 
-<section id="v1-browser-support">
+<section id="browser-support">
 
 # Browser support
 

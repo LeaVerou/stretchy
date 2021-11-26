@@ -28,7 +28,7 @@ input, textarea, select {
 
 	&::placeholder {
 		color: inherit;
-		opacity: .4;
+		opacity: .6;
 	}
 }
 
@@ -41,7 +41,10 @@ a {
 	color: inherit;
 }
 
-header, section, footer {
+header,
+section,
+footer,
+body > md-block:not([rendered="remote"]) {
 	max-width: 900px;
 	padding: 1.5em calc(50% - 450px);
 }
@@ -132,19 +135,20 @@ section section {
 }
 
 body > section,
+body > md-block:not([rendered="remote"]),
 md-block > section,
 #features {
 	background: var(--base-color);
 	color: black;
 	order: 3;
 
-	&:last-of-type {
-		--next-section-background: var(--accent1);
-	}
-
 	& h1 {
 		color: var(--accent2);
 	}
+}
+
+body > md-block:not([rendered="remote"]) {
+	order: 1;
 }
 
 md-block > section:nth-of-type(odd),
@@ -165,6 +169,10 @@ md-block > section:nth-of-type(odd),
 	}
 
 
+}
+
+md-block > section:last-of-type {
+	--next-section-background: var(--accent1);
 }
 
 
@@ -232,6 +240,7 @@ md-block > section:nth-of-type(odd),
 }
 
 footer {
+	order: 4;
 	background: var(--accent1) url(logo.svg) right / auto 100% no-repeat;
 	background-origin: content-box;
 }
@@ -290,7 +299,8 @@ footer {
     text-decoration: none;
 }
 
-md-block {
+md-block[rendered="remote"],
+md-block[rendered="content"] {
 	display: contents;
 }
 
