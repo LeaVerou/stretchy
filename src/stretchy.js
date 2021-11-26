@@ -35,7 +35,7 @@ export function resize (element) {
 		element.style.height = "0";
 
 		if (cs.boxSizing == "border-box") {
-			offset = element.offsetHeight;
+			offset = element.offsetHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
 		}
 		else if (cs.boxSizing == "content-box") {
 			offset = -element.clientHeight + parseFloat(cs.minHeight);
