@@ -15,13 +15,15 @@ function bundle(format, {minify} = {}) {
 		filename += ".min";
 	}
 
-	let plugins = [];
+	let plugins = [
+		babel({
+			presets: ["@babel/preset-env"],
+			allowAllFormats: true,
+		})
+	];
 
 	if (minify) {
 		plugins.push(
-			babel({
-				allowAllFormats: true,
-			}),
 			terser({
 				compress: true,
 				mangle: true
