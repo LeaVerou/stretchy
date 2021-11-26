@@ -14,6 +14,10 @@
 		filter: invert();
 	}
 
+	#notext:target ~ #cat {
+		mask: none;
+	}
+
 	#beige:target ~ #cat {
 		filter: none;
 	}
@@ -37,6 +41,7 @@
 		<text transform="matrix(0.3573 -0.9309 0.9336 0.3584 281.624 97.9468)">y</text>
 	</mask>
 </defs>
+<g id="notext"></g>
 <g id="red"></g>
 <g id="beige"></g>
 <path id="cat" d="M295.5,5.07c3.5,0,7,0,10.5,0c3.179,0.519,6.402,0.535,9.603,0.769c5.742,0.421,11.236,1.919,16.709,3.52
