@@ -41,6 +41,10 @@ a {
 	color: inherit;
 }
 
+:where(h1, h2, h3, h4, h5, h6) a:not(:hover) {
+	text-decoration: none;
+}
+
 header,
 section,
 footer,
@@ -167,8 +171,6 @@ md-block > section:nth-of-type(odd),
 	& h1 {
 		color: var(--base-color);
 	}
-
-
 }
 
 md-block > section:last-of-type {
@@ -310,4 +312,19 @@ md-block header {
 
 md-block:not([rendered]) {
 	white-space: pre-line;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+th, td {
+	border: 1px solid var(--accent1);
+	padding: .3em .5em;
+}
+
+th {
+	background: var(--accent1);
+	color: var(--base-color);
 }

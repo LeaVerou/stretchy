@@ -114,7 +114,7 @@ If needed, these are Stretchy’s API methods:
 | `resize(element)` | Autosize one element based on its content. Note that this does not set up any event listeners, it just calculates and sets the right dimension (width or height, depending on the type of control) once.
 | `resizeAll([elements \| selector, [root]])` | Apply `Stretchy.resize()` to a collection of elements, or all Stretchy is set to apply to, if no argument is provided. |
 | `resizes(element)` | Can Stretchy be used on this particular element? (checks if element is in the DOM, if it's of the right type and if it matches the selector filter provided by `data-stretchy-selector`, if the attribute is set. |
-| `selectors.base` | CSS selector that elements need to match to be resized. |
+| `selectors.base` | CSS selector to tell Stretchy which elements *can* be resized. Defaults to `input, select, textarea`. Main use case for modifying this is in case you have a custom element that behaves like these and want Stretchy to stop ignoring it. If you just want to filter which elements Stetchy resizes, use `filter` below. |
 | `selectors.filter` | CSS selector that elements need to match to be resized. |
 | `active` | Boolean. Set to `false` to temporarily disable Stretchy globally.` |
 
