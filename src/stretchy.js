@@ -15,7 +15,7 @@ export const selectors = {
 }
 
 // Autosize one element. The core of Stretchy.
-export function resize(element) {
+export function resize (element) {
 	if (!resizes(element)) {
 		return;
 	}
