@@ -1,5 +1,7 @@
 <header>
 
+<img src="https://stretchy.verou.me/logo.svg#red" width="200">
+	
 # Stretchy
 
 Form element autosizing, the way it should be!
