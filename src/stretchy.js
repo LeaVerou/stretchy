@@ -119,7 +119,7 @@ export function resize (element) {
 
 			if (!cs[appearance] || cs[appearance] !== "none") {
 				// Account for arrow
-				element.style.width = "calc(" + element.style.width + " + 2.1em)";
+				element.style.width = "calc(" + element.style.width + " + var(--arrow-width, 2.1em))";
 			}
 		}
 
